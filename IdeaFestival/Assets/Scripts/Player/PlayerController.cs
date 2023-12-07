@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DashDelayTime()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         dash = true;
     }
 
