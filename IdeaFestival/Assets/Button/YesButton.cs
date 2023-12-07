@@ -20,6 +20,7 @@ public class YesButton : MonoBehaviour
 
     public void BossroomButton()
     {
+        SceneManager.LoadScene("Boss_Level1");
         GameManager.instance.Sizemain = 10f;
         GameManager.instance.BossCheck = true;
 
