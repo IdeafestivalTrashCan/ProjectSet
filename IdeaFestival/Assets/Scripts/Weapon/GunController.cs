@@ -50,11 +50,13 @@ public class GunController : MonoBehaviour
         }
     }
 
+
+
     private IEnumerator GunDaley()
     {
         yield return new WaitForSeconds(1f);
         isGun = true;
-        Invoke("BulletDestory", 0f);
+        BulletDestory();
     }
 
     private void BulletDestory()

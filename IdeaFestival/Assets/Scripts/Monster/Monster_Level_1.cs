@@ -11,12 +11,11 @@ public class Monster_Level_1 : MonoBehaviour
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private Slider Hp;
 
-    private GameObject aDirection;
+
     private SpriteRenderer monsterSprite;
     private bool monsterAttack = true;
-    private GameObject attackL;
-    private GameObject attackR;
-    
+    private bool isAttack = false;
+
     private int maxHp = 100;
     private int curHp = 100;
 
@@ -29,7 +28,7 @@ public class Monster_Level_1 : MonoBehaviour
     private void Update()
     {
         Hp.value = (float)curHp / maxHp;
-        
+
         Collider2D[] hit = Physics2D.OverlapBoxAll(transform.position, size, 0f);
 
         foreach (Collider2D hitCollider2D in hit)
@@ -42,13 +41,16 @@ public class Monster_Level_1 : MonoBehaviour
 
                 float dot = Vector3.Dot(direction.normalized, transform.right);
 
-                if (dot > 0)
-                    monsterSprite.flipX = true;
-                else
-                    monsterSprite.flipX = false;
-                
-                if (monsterAttack == true)
-                    Attack(monsterSprite.flipX);
+               
+
+                if (monsterAttack && !isAttack )
+                {
+                    if (dot > 0)
+                        monsterSprite.flipX = true;
+                    else
+                        monsterSprite.flipX = false;
+                    StartCoroutine(AttackDirection(monsterSprite.flipX));
+                }
             }
         }
 
@@ -57,26 +59,31 @@ public class Monster_Level_1 : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    private void Attack(bool direction)
-    {
-        if (direction != true)
-        {
-            transform.Find("AttackR").gameObject.SetActive(false);
-            transform.Find("AttackL").gameObject.SetActive(true);
-        }
-        else
-        {
-            transform.Find("AttackL").gameObject.SetActive(false);
-            transform.Find("AttackR").gameObject.SetActive(true);
-        }
 
-        StartCoroutine(AttackDelay(direction));
+    IEnumerator AttackDirection(bool direction)
+    {
+        if (!isAttack)
+        {
+            isAttack = true;
+            if (direction != true)
+            {
+                transform.Find("AttackR").gameObject.SetActive(false);
+                transform.Find("AttackL").gameObject.SetActive(true);
+            }
+            else
+            {
+                transform.Find("AttackL").gameObject.SetActive(false);
+                transform.Find("AttackR").gameObject.SetActive(true);
+            }
+            yield return null;
+            StartCoroutine(AttackDelay(direction));
+        }
     }
 
     private IEnumerator AttackDelay(bool dir)
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
+
         moveSpeed = 0f;
         transform.Find("AttackR").gameObject.SetActive(false);
         transform.Find("AttackL").gameObject.SetActive(false);
@@ -87,19 +94,20 @@ public class Monster_Level_1 : MonoBehaviour
             GameObject attack = Instantiate(attackPrefab);
             Vector3 vector3 = new Vector3(transform.position.x, transform.position.y, 0f);
             attack.transform.position = vector3;
-            
+
             if (dir != true)
             {
                 attack.GetComponent<Rigidbody2D>().
                     AddForce(Vector2.left * 5f, ForceMode2D.Impulse);
             }
             else
-            { 
+            {
                 attack.GetComponent<Rigidbody2D>().
                     AddForce(Vector2.right * 5f, ForceMode2D.Impulse);
             }
         }
         
+
         StartCoroutine(AttackDestory());
     }
 
@@ -108,6 +116,7 @@ public class Monster_Level_1 : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         moveSpeed = 2f;
         monsterAttack = true;
+        isAttack = false;
     }
 
     private void OnDrawGizmos()
