@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer Renderer;
     private bool isJump = true;
     private float PlayerX;
-    private float PlayerY;
     private Animator animator;
     private Rigidbody2D rigid;
-    private bool dash = true;
+    private bool isDash = true;
+    private bool isDashing = false;
     
     private void Start()
     {
@@ -45,6 +45,12 @@ public class PlayerController : MonoBehaviour
             Run();
             transform.Translate(-Speed * Time.deltaTime, 0f, 0f);
             Renderer.flipX = true;
+
+            if(isDashing && !(Renderer.flipX))
+            {
+                rigid.velocity = Vector2.zero;
+                rigid.angularVelocity = 0f;
+            }
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
@@ -52,6 +58,12 @@ public class PlayerController : MonoBehaviour
             Run();
             transform.Translate(Speed * Time.deltaTime, 0f, 0f);
             Renderer.flipX = false;
+
+            if (isDashing && Renderer.flipX)
+            {
+                rigid.velocity = Vector2.zero;
+                rigid.angularVelocity = 0f;
+            }
         }
 
         else
@@ -73,15 +85,17 @@ public class PlayerController : MonoBehaviour
     
     private void Dash(Rigidbody2D rb, bool sr)
     {
-        if (dash == true)
+        if (isDash)
         {
-            dash = false;
+            isDash = false;
+            isDashing = false;
+
             StartCoroutine(DashDelayTime());
 
-            if (sr == true)
-                rb.AddForce(Vector2.left * 10, ForceMode2D.Impulse);
+            if (sr)
+                rb.velocity = Vector2.left * 7;
             else
-                rb.AddForce(Vector2.right * 10, ForceMode2D.Impulse);
+                rb.velocity = Vector2.right * 7;
             
             StartCoroutine(StopMovement(rb));
         }
@@ -92,13 +106,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f); 
 
         rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f; 
+        rb.angularVelocity = 0f;
+        isDashing = false;
     }
 
     private IEnumerator DashDelayTime()
     {
-        yield return new WaitForSeconds(3f);
-        dash = true;
+        yield return new WaitForSeconds(1f);
+        isDash = true;
     }
 
     private void Run()

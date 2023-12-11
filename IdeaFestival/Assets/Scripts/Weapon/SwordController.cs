@@ -66,11 +66,13 @@ public class SwordController : MonoBehaviour
         if (isSprite == false)
         {
             SwordOrigin.transform.localScale = new Vector3(0.2f, 0.2f, 0f);
+            SwordOrigin.transform.localPosition = new Vector3(0.68f, -0.27f);
         }
 
         if (isSprite == true)
         {
             SwordOrigin.transform.localScale = new Vector3(-0.2f, 0.2f, 0f);
+            SwordOrigin.transform.localPosition = new Vector3(-0.68f, -0.27f);
         }
     }
 

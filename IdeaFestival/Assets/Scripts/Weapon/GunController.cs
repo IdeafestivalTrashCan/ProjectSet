@@ -25,10 +25,15 @@ public class GunController : MonoBehaviour
         isSprite = GunSpriteRenderer.flipX;
 
         if (isSpritePlayer == true)
+        {
             GunSpriteRenderer.flipX = true;
+            transform.localPosition = new Vector2(-0.68f, 0.13f);
+        }
         else
+        {
             GunSpriteRenderer.flipX = false;
-        
+            transform.localPosition = new Vector2(0.68f, 0.13f);
+        }
         if (Input.GetKeyDown(KeyCode.X) && isGun == true
             && GameManager.instance.PlayerWeapon[1] == true)
         {
@@ -50,11 +55,13 @@ public class GunController : MonoBehaviour
         }
     }
 
+
+
     private IEnumerator GunDaley()
     {
         yield return new WaitForSeconds(1f);
         isGun = true;
-        Invoke("BulletDestory", 0f);
+        BulletDestory();
     }
 
     private void BulletDestory()
