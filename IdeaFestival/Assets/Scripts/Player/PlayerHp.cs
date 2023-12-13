@@ -9,26 +9,45 @@ public class PlayerHp : MonoBehaviour
     public Slider HP;
 
     private int MaxHp = 100;
-    private int curHp = 100;
-    
+    [SerializeField] private int curHp = 100;
+    private bool isAttackDealy = false;
+
     void Start()
     {
         HP.value = (float)curHp / MaxHp;
     }
-    
+
     void Update()
     {
-        
+
     }
 
     private void OnTriggerStay2D(Collider2D other)
-    { 
+    {
         Die();
-        
-        if (other.gameObject.CompareTag("Monster"))
-            curHp -= 1;
+
+        if (!isAttackDealy)
+        {
+            if (other.gameObject.CompareTag("Monster"))
+            {
+                isAttackDealy = true;
+                curHp -= 1;
+                Invoke("AttackDelay", 0.25f);
+            }
+        }
+
 
         HP.value = (float)curHp / MaxHp;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        curHp -= damage;
+    }
+
+    void AttackDelay()
+    {
+        isAttackDealy = false;
     }
 
     void Die()

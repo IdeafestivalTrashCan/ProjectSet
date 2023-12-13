@@ -4,11 +4,14 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [Header("Setting")]
-    [SerializeField] private Vector2 size; // 공격범위
+    [SerializeField] private Vector2 size; // 인식범위
+    [SerializeField] private Vector2 attackSize; // 공격범위
     [SerializeField] private float moveSpeed;
     [SerializeField] private int curHp = 100;
+    [SerializeField] private int damage = 5;
 
     private SpriteRenderer monsterSprite;
+    private Animator animator;
 
     [Header("CurBoolState")]
     [SerializeField] private bool monsterAttack = true;
@@ -20,14 +23,16 @@ public class Monster : MonoBehaviour
     [SerializeField] private bool isNoAttack = true;
 
     [Header("Range And curCoroutine")]
-    [SerializeField] Collider2D[] hit;
-    [SerializeField] Coroutine curCoroutine = null;
+    [SerializeField] Collider2D[] detectHit;
+    [SerializeField] Collider2D[] attackHit;
     private bool isAttackDealy = false;
+
+    private Coroutine curCoroutine;
+   
 
     private void Start()
     {
-        monsterSprite = GetComponent<SpriteRenderer>();
-        Init(100, true, true);
+        Init(new Vector2(10, 3), new Vector2(3, 3), 100, true, true);
         Think();
     }
 
@@ -36,9 +41,10 @@ public class Monster : MonoBehaviour
     private void Update()
     {
 
-        hit = Physics2D.OverlapBoxAll(transform.position, size, 0f);
+        detectHit = Physics2D.OverlapBoxAll(transform.position, size, 0f, 6);
+        attackHit = Physics2D.OverlapBoxAll(transform.position, attackSize, 0f, 6);
 
-        foreach (Collider2D hitCollider2D in hit)
+        foreach (Collider2D hitCollider2D in detectHit)
         {
             if (hitCollider2D.gameObject.CompareTag("Player"))
             {
@@ -48,9 +54,10 @@ public class Monster : MonoBehaviour
 
                 float dot = Vector3.Dot(direction.normalized, transform.right);
 
-
                 StopCoroutine(curCoroutine);
                 isThinking = false;
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isWalk", false);
 
                 if (monsterAttack && !isAttack)
                 {
@@ -59,15 +66,22 @@ public class Monster : MonoBehaviour
                     else
                         monsterSprite.flipX = false;
 
-                    if (!isNoAttack)
-                        StartCoroutine(AttackDirection(monsterSprite.flipX));
+                    if (!isNoAttack && false)
+                        foreach (Collider2D hitCollider in attackHit)
+                        {
+
+                            if (hitCollider.gameObject.CompareTag("Player"))
+                            {
+                               AttackDirection(monsterSprite.flipX);
+                            }
+                        }
                 }
             }
         }
         if (!isThinking)
         {
             bool check = false;
-            foreach (Collider2D hitCollider2D in hit)
+            foreach (Collider2D hitCollider2D in detectHit)
             {
 
                 if (hitCollider2D.gameObject.CompareTag("Player"))
@@ -78,7 +92,7 @@ public class Monster : MonoBehaviour
             }
             if (!check)
             {
-                Debug.Log("Check");
+                Debug.Log("Start Think");
                 StopCoroutine(curCoroutine);
                 Think();
             }
@@ -91,32 +105,38 @@ public class Monster : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    IEnumerator AttackDirection(bool direction)
+    void AttackDirection(bool direction)
     {
-        if (!isAttack)
+        Debug.Log("Attack");
+        foreach (Collider2D hitCollider2D in attackHit)
         {
-            isAttack = true;
-            if (direction != true)
+            if (hitCollider2D.gameObject.CompareTag("Player"))
             {
-                transform.Find("AttackR").gameObject.SetActive(false);
-                transform.Find("AttackL").gameObject.SetActive(true);
+                if (!isAttack)
+                {
+                    isAttack = true;
+                    transform.Find("WarningSign").gameObject.SetActive(true);
+                    StartCoroutine(AttackDelay(direction));
+                }
             }
             else
-            {
-                transform.Find("AttackL").gameObject.SetActive(false);
-                transform.Find("AttackR").gameObject.SetActive(true);
-            }
-            yield return null;
-            StartCoroutine(AttackDelay(direction));
+                Think();
         }
     }
     IEnumerator AttackDelay(bool direction)
     {
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(1.5f);//공격 대기시간
+        foreach (Collider2D hitCollider2D in attackHit)
+        {
+            if (hitCollider2D.gameObject.CompareTag("Player"))
+            {
+                hitCollider2D.GetComponent<PlayerHp>().TakeDamage(damage);
+            }
+        }
+        animator.SetBool("isAttack", false);
 
-        moveSpeed = 0f;
-        transform.Find("AttackR").gameObject.SetActive(false);
-        transform.Find("AttackL").gameObject.SetActive(false);
+        transform.Find("WarningSign").gameObject.SetActive(false);
 
         if (monsterAttack == true)
         {
@@ -134,13 +154,17 @@ public class Monster : MonoBehaviour
         Think();
     }
 
-    protected void Init(int hp, bool ismeleeAttack, bool isNoAttack)
+    protected void Init(Vector2 size, Vector2 attackSize, int hp, bool ismeleeAttack, bool isNoAttack)
     {
+        monsterSprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();   
+        this.size = size;
+        this.attackSize = attackSize;
         this.curHp = hp;
         this.isMeleeAttack = ismeleeAttack;
         this.isNoAttack = isNoAttack;
     }
-    void Think()
+    protected void Think()
     {
         isThinking = true;
         int patternIndex = Random.Range(0, 3);
@@ -162,18 +186,20 @@ public class Monster : MonoBehaviour
     }
     protected IEnumerator Idle()
     {
-
+        animator.SetBool("isIdle", true);
         yield return new WaitForSeconds(0.5f);
-
+        animator.SetBool("isIdle", false);
         Think();
     }
     protected IEnumerator Work(Vector3 direction)
     {
+        animator.SetBool("isWalk", false);
         for (int i = 0; i < 100; i++)
         {
             transform.position = Vector3.MoveTowards(transform.position, direction, 0.05f);
             yield return new WaitForSeconds(0.01f);
         }
+        animator.SetBool("isWalk", false);
         Think();
     }
 
@@ -181,25 +207,19 @@ public class Monster : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, size);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, attackSize);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void TakeDamage(int damage)
     {
-        if (other.gameObject.CompareTag("Player_Damge"))
-        {
-            if (isNoAttack && !isAttackDealy)
-            {
-                isAttackDealy = true;
-                monsterSprite.color = Color.red;
-                curHp -= 10;
-                Invoke("ColorDelay", 0.25f);
-            }
-        }
+        monsterSprite.color = Color.red;
+        curHp -= damage;
+        Invoke("ColorDelay", 0.25f);
     }
 
     private void ColorDelay()
     {
         monsterSprite.color = Color.white;
-        isAttackDealy = false;
     }
 }

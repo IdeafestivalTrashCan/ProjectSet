@@ -6,8 +6,7 @@ public class CarrotMonster : Monster
 {
     private void Start()
     {
-        Init(100, true, false);
+        Init(new Vector2(7, 3), new Vector2(3, 3),100, true, false);
+        Think();
     }
-
-
 }
