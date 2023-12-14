@@ -17,13 +17,11 @@ public class SwordController : MonoBehaviour
 
     private bool DelayX = true;
     private bool isSprite;
-    private Transform Player;
     private bool SwordEulerAngles = false;
     private int dmg = 5;
 
     void Start()
     {
-        Player = transform.Find("Player");
         CharacterFilpXCheck = GetComponent<SpriteRenderer>();
     }
 
@@ -31,7 +29,7 @@ public class SwordController : MonoBehaviour
     {
         isSprite = CharacterFilpXCheck.flipX;
 
-        filpXCheck();
+        FlipXCheck();
 
         if (Input.GetKeyDown(KeyCode.X) &&
             DelayX == true && isSprite == false &&
@@ -67,7 +65,7 @@ public class SwordController : MonoBehaviour
 
             foreach (Collider2D collider in leftCollider)
             {
-                if (collider.tag == "Monster")
+                if (collider.CompareTag("Monster")) 
                     collider.GetComponent<Monster>().TakeDamage(dmg);
             }
 
@@ -82,7 +80,7 @@ public class SwordController : MonoBehaviour
         }
     }
 
-    void filpXCheck()
+    void FlipXCheck()
     {
         if (isSprite == false)
         {

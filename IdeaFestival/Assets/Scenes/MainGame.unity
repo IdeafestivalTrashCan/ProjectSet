@@ -1386,18 +1386,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e27a56d7361ef14c940d096e0009d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 10, y: 3}
-  attackSize: {x: 0, y: 0}
-  moveSpeed: 0
+  moveSpeed: 5
   curHp: 100
   damage: 5
+  player: {fileID: 0}
   monsterAttack: 1
   isAttack: 0
   isThinking: 0
-  isMeleeAttack: 1
   isNoAttack: 0
-  detectHit: []
-  attackHit: []
+  isChase: 0
+  attackDistance: 0
+  detectDistance: 0
+  atkCur: 0
+  atkCool: 1.5
 --- !u!95 &483839919
 Animator:
   serializedVersion: 5
@@ -2863,8 +2864,8 @@ MonoBehaviour:
   Sizemain: 5
   BossCheck: 0
   PlayerWeapon: 0000
-  PlayerDamge: 10
-  playertrans: {fileID: 0}
+  PlayerDamage: 30
+  playerTrans: {fileID: 0}
 --- !u!1 &1078034995
 GameObject:
   m_ObjectHideFlags: 0

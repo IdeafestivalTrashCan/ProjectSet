@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        GameManager.instance.playertrans = transform;
         
         Camera mainCamera = Camera.main; 
         mainCamera.orthographicSize = GameManager.instance.Sizemain;
