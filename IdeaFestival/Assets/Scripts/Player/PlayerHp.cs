@@ -10,7 +10,6 @@ public class PlayerHp : MonoBehaviour
 
     private int MaxHp = 100;
     [SerializeField] private int curHp = 100;
-    private bool isAttackDealy = false;
 
     void Start()
     {
@@ -19,35 +18,14 @@ public class PlayerHp : MonoBehaviour
 
     void Update()
     {
-
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        Die();
-
-        if (!isAttackDealy)
-        {
-            if (other.gameObject.CompareTag("Monster"))
-            {
-                isAttackDealy = true;
-                curHp -= 1;
-                Invoke("AttackDelay", 0.25f);
-            }
-        }
-
-
         HP.value = (float)curHp / MaxHp;
+        Die();
     }
 
     public void TakeDamage(int damage)
     {
         curHp -= damage;
-    }
-
-    void AttackDelay()
-    {
-        isAttackDealy = false;
+        Invoke("AttackDelay", 0.25f);
     }
 
     void Die()

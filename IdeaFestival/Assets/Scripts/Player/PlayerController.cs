@@ -41,28 +41,16 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Run();
+            animator.SetBool("isRun", true);
             transform.Translate(-Speed * Time.deltaTime, 0f, 0f);
             Renderer.flipX = true;
-
-            if(isDashing && !(Renderer.flipX))
-            {
-                rigid.velocity = Vector2.zero;
-                rigid.angularVelocity = 0f;
-            }
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            Run();
+            animator.SetBool("isRun", true);
             transform.Translate(Speed * Time.deltaTime, 0f, 0f);
             Renderer.flipX = false;
-
-            if (isDashing && Renderer.flipX)
-            {
-                rigid.velocity = Vector2.zero;
-                rigid.angularVelocity = 0f;
-            }
         }
 
         else
@@ -113,11 +101,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         isDash = true;
-    }
-
-    private void Run()
-    {
-        animator.SetBool("isRun", true);
     }
 
     private void OnCollisionStay2D(Collision2D other)

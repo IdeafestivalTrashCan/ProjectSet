@@ -29,11 +29,11 @@ public class Monster : MonoBehaviour
 
     [Header("Atk Info")]
     [SerializeField] private float atkCur = 0;
-    [SerializeField] private float atkCool = 0.5f;
+    [SerializeField] private float atkCool = 1.5f;
 
     private void Start()
     {
-        Init(5, 3, 100, true);
+        Init(5, 3, 100, 8, true);
     }
 
 
@@ -49,12 +49,12 @@ public class Monster : MonoBehaviour
         if (!isChase && !isAttack)
         {
             transform.Find("WarningSign").gameObject.SetActive(false);
-           // if (!isThinking)
-                //Think();
+            if (!isThinking)
+                Think();
         }
         else
         {
-            //if (curCoroutine != null) StopCoroutine(curCoroutine);
+            if (curCoroutine != null) StopCoroutine(curCoroutine);
         }
     }
     void Chase()
@@ -90,10 +90,22 @@ public class Monster : MonoBehaviour
             isAttack = true;
             transform.Find("WarningSign").gameObject.SetActive(true);
 
+            float direction = player.transform.position.x - transform.position.x;
+
+            if (direction > 0)
+            {
+                monsterSprite.flipX = true;
+            }
+            else if (direction < 0)
+            {
+                monsterSprite.flipX = false;
+            }
+
             if (atkCur > 0) atkCur -= Time.deltaTime;
             else
             {
                 animator.SetTrigger("Attack");
+                Invoke("AttackPlay", 0.2f);
                 atkCur = atkCool;
             }
         }
@@ -103,12 +115,21 @@ public class Monster : MonoBehaviour
             atkCur = 0;
         }
     }
-
-    protected void Init(float detectDistance, float attackDistance, int hp, bool isNoAttack)
+    void AttackPlay()
+    {
+        Debug.Log("ATtack GOOGOGOGO");
+        if (IsCheckDistance(attackDistance))
+        {
+            player.GetComponent<PlayerHp>().TakeDamage(damage);
+        }
+        
+    }
+    protected void Init(float detectDistance, float attackDistance, int hp, int damage, bool isNoAttack)
     {
         monsterSprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
+        this.damage = damage;
 
         this.detectDistance = detectDistance;
         this.attackDistance = attackDistance;
@@ -155,6 +176,12 @@ public class Monster : MonoBehaviour
         Think();
     }
 
+    IEnumerator WaitForAttackAnimation()
+    {
+        yield return new WaitForSeconds(0.7f);
+        isAttack = false;
+    }
+
     private bool IsCheckDistance(float distance)
     {
         return distance >= Vector2.Distance(transform.position, player.transform.position);
@@ -164,6 +191,9 @@ public class Monster : MonoBehaviour
     {
         monsterSprite.color = Color.red;
         curHp -= damage;
+
+        if (curHp <= 0)
+            gameObject.SetActive(false);
         Invoke("ColorDelay", 0.25f);
     }
 

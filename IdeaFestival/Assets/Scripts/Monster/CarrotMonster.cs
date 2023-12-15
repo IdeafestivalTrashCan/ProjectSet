@@ -6,6 +6,6 @@ public class CarrotMonster : Monster
 {
     private void Start()
     {
-        Init(6, 3, 100, false); 
+        Init(5, 2.5f, 100, 5, false); 
     }
 }
