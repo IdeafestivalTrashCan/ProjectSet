@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -16,15 +12,15 @@ public class GameManager : MonoBehaviour
 
     public bool[] PlayerWeapon;
 
-    public int PlayerDamge = 100;
-    public Transform playertrans;
-    
+    public int PlayerDamage = 30;
+    public Transform playerTrans;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            
+
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -33,11 +29,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-    
     void Update()
     {
         GameMoneyCash();
