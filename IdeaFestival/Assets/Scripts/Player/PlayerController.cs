@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
@@ -31,13 +32,20 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Tutorial_Scene");
+            transform.position = new Vector3(-30, -2, 0);
+        }
         Camera mainCamera = Camera.main; 
         mainCamera.orthographicSize = GameManager.instance.Sizemain;
         
         PlayerX = transform.position.x;
-        
-        _Camera.position = new Vector3(PlayerX, 0f, -1f);
+
+        if (transform.position.y <= 0)
+            _Camera.position = new Vector3(PlayerX, 0f, -1f);
+        else
+            _Camera.position = new Vector3(PlayerX, transform.position.y, -1f);
         
         if (Input.GetKey(KeyCode.LeftArrow))
         {

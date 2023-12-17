@@ -6,16 +6,6 @@ public class SwordCheck : MonoBehaviour
 {
     public GameObject[] panelF;
     public GameObject[] panelT;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void PanelFalse()
     {
