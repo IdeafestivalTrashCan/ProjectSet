@@ -1,54 +1,107 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
     GameObject npcCanvas;
+    [SerializeField] protected GameObject button;
 
     Image ilust;
     public Sprite ilustImage;
 
-    TextMeshProUGUI chat;
-    string[] chatingDetail;
+    protected TextMeshProUGUI chat;
 
-    GameObject player;
+    [Header("Chat Detail")]
+    [SerializeField] protected string[] chatingDetail;
+    protected string[] chooseDetail;
+    [Header("Setting")]
+    [SerializeField] protected GameObject player;
+    [SerializeField] protected bool isChooseNPC;
 
-    void Init(int chatLength, string[] chatDetail)
+    [SerializeField] TextMeshProUGUI[] choice;
+
+
+    protected bool isOnChat = false;
+
+    [SerializeField] protected int curPage = 0;
+    [SerializeField] protected int choosePage = 99;
+
+    private void Awake()
     {
-        player = GameObject.Find("Player");
-        ScriptSwitch(false);
-
-        ilust = GameObject.Find("NPC Ilust").GetComponent<Image>();
-        ilust.sprite = ilustImage;
-        chat = GameObject.Find("ChatText").GetComponent<TextMeshProUGUI>();
-        npcCanvas = GameObject.Find("NPC Canvas");
-        chatingDetail = new string[chatLength];
-
-        for (int i = 0; i < chatLength; i++)
-            chatingDetail[i] = chatDetail[i];
+        player = GameObject.Find("GameManager/Player");
     }
-
-    void ScriptSwitch(bool b1)
-    {
-        player.GetComponent<PlayerController>().enabled = b1;
-        player.GetComponent<PlayerController>().enabled = b1;
-    }
-
-
     private void Update()
     {
         if (IsCheckDistance())
         {
+            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && isChooseNPC)
+            {
+                Debug.Log("대화 시작!");
+                Init(chatingDetail.Length, chatingDetail, false);
+                isOnChat = true;
+            }
 
+            if (((Input.GetKeyDown(KeyCode.Space) && isOnChat) || (Input.GetKeyDown(KeyCode.Return) && isOnChat)) )
+                NextPage();
         }
     }
 
-    bool IsCheckDistance()
+    protected void Init(int chatLength, string[] chatDetail, bool isChooseNPC)
+    {
+        ScriptSwitch(false);
+
+        npcCanvas = player.transform.Find("NPC Canvas").gameObject;
+        button = npcCanvas.transform.Find("ChatPane/Button").gameObject;
+
+        ilust = npcCanvas.transform.Find("NPC Ilust").gameObject.GetComponent<Image>();
+        ilust.sprite = ilustImage;
+
+        chat = npcCanvas.transform.Find("ChatPane/ChatText").gameObject.GetComponent<TextMeshProUGUI>();
+
+        chatingDetail = new string[chatLength];
+
+        for (int i = 0; i < chatLength; i++)
+            chatingDetail[i] = chatDetail[i];
+
+        npcCanvas.SetActive(true);
+        chat.text = chatingDetail[curPage];
+
+        this.isChooseNPC = isChooseNPC;
+    }
+
+    protected void ChooseSetting(string[] choiceText, int count)
+    {
+        choosePage = count - 1;
+        chooseDetail = choiceText;
+    }
+
+
+
+    protected void ScriptSwitch(bool b1)
+    {
+        player.GetComponent<PlayerController>().enabled = b1;
+    }
+
+    public void NextPage()
+    {
+        curPage++;
+        if (curPage >= chatingDetail.Length)
+        {
+            isOnChat = false;
+            curPage = 0;
+            npcCanvas.SetActive(false);
+            ScriptSwitch(true);
+        }
+        else
+        {
+            chat.text = chatingDetail[curPage];
+        }
+
+    }
+
+    protected bool IsCheckDistance()
     {
         return 6 >= Vector2.Distance(transform.position, player.transform.position);
     }
