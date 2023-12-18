@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Tutorial_Scene");
             transform.position = new Vector3(-30, -2, 0);
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            SceneManager.LoadScene("Vegetable_Scene 1");
+            transform.position = new Vector3(-30, -2, 0);
+        }
         Camera mainCamera = Camera.main; 
         mainCamera.orthographicSize = GameManager.instance.Sizemain;
         

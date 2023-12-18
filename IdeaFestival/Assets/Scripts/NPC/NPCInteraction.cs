@@ -4,7 +4,6 @@ public class NPCInteraction : MonoBehaviour
 {
     public Transform Player;
     public GameObject Chating;
-    public GameObject F;
     public Animator animator;
 
     private bool isScan;
@@ -23,14 +22,12 @@ public class NPCInteraction : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            F.SetActive(true);
             isScan = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        F.SetActive(false);
         Chating.SetActive(false);
     }
 
@@ -38,8 +35,6 @@ public class NPCInteraction : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
-        F.SetActive(false);
-        Chating.SetActive(false);
     }
 
     private void Scan()
@@ -48,7 +43,6 @@ public class NPCInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                F.SetActive(false);
                 Chating.SetActive(true);
             }
         }

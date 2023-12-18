@@ -51,7 +51,7 @@ public class SwordController : MonoBehaviour
             Slash[0].SetActive(true);
             DamgeLine[0].SetActive(true);
 
-            Invoke("Delay", 0.5f);
+            Invoke("Delay", 0.3f);
             SwordEulerAngles = false;
         }
 
@@ -75,7 +75,7 @@ public class SwordController : MonoBehaviour
             Slash[1].SetActive(true);
             DamgeLine[1].SetActive(true);
 
-            Invoke("Delay", 0.5f);
+            Invoke("Delay", 0.3f);
             SwordEulerAngles = true;
         }
     }

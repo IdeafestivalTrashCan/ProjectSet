@@ -40,9 +40,13 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        Idle();
-        Chase();
-        Attack();
+        if (!isNoAttack)
+        {
+            Idle();
+            Chase();
+            Attack();
+
+        }
     }
     private void Idle()
     {
@@ -122,7 +126,7 @@ public class Monster : MonoBehaviour
         {
             player.GetComponent<PlayerHp>().TakeDamage(damage);
         }
-        
+
     }
     protected void Init(float detectDistance, float attackDistance, int hp, int damage, bool isNoAttack)
     {
