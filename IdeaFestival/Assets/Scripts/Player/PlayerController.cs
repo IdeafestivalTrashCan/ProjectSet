@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rigid;
     private bool isDash = true;
-    private bool isDashing = false;
     
     private void Start()
     {
@@ -42,13 +41,11 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Vegetable_Scene 1");
             transform.position = new Vector3(-30, -2, 0);
         }
-        Camera mainCamera = Camera.main; 
-        mainCamera.orthographicSize = GameManager.instance.Sizemain;
         
         PlayerX = transform.position.x;
 
-        if (transform.position.y <= 0)
-            _Camera.position = new Vector3(PlayerX, 0f, -1f);
+        if (transform.position.y <= 1)
+            _Camera.position = new Vector3(PlayerX, 1f, -1f);
         else
             _Camera.position = new Vector3(PlayerX, transform.position.y, -1f);
         
@@ -88,7 +85,6 @@ public class PlayerController : MonoBehaviour
         if (isDash)
         {
             isDash = false;
-            isDashing = false;
 
             StartCoroutine(DashDelayTime());
 
@@ -107,7 +103,6 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0f;
-        isDashing = false;
     }
 
     private IEnumerator DashDelayTime()

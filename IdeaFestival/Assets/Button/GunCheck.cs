@@ -6,12 +6,17 @@ public class GunCheck : MonoBehaviour
 {
     public GameObject Gun;
     GameObject Yangchoo;
+    private GameObject ammoUI;
+
     private void Start()
     {
         Gun = GameObject.Find("GameManager/Player/Gun").gameObject;
+        ammoUI = GameObject.Find("GameManager/PlayerUI/Ammo");
     }
     public void PanelFalse()
     {
+        ammoUI.SetActive(true);
+        GameManager.instance.PlayerDamage = 4;
         Gun.SetActive(true);
         Yangchoo = GameObject.Find("Yangchoo");
         Yangchoo.GetComponent<YangChoo>().NextPage();

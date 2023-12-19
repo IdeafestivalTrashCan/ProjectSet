@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarrotMonster : Monster
+public class Carrot : Monster
 {
     private void Start()
     {
-        Init(5, 2.5f, 100, 5, false); 
+        Init(7, 2.5f, 30, 5, 5, false, 2); 
     }
 }

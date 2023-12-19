@@ -19,6 +19,7 @@ public class NPC : MonoBehaviour
     [Header("Setting")]
     [SerializeField] protected GameObject player;
     [SerializeField] protected bool isChooseNPC;
+    protected bool isEndChat = false;
 
     [SerializeField] TextMeshProUGUI[] choice;
 
@@ -36,7 +37,7 @@ public class NPC : MonoBehaviour
     {
         if (IsCheckDistance())
         {
-            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && isChooseNPC)
+            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && isChooseNPC && !isEndChat)
             {
                 Debug.Log("대화 시작!");
                 Init(chatingDetail.Length, chatingDetail, false);
@@ -93,6 +94,7 @@ public class NPC : MonoBehaviour
             curPage = 0;
             npcCanvas.SetActive(false);
             ScriptSwitch(true);
+            isEndChat = true;
         }
         else
         {
