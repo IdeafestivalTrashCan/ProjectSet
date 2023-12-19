@@ -6,18 +6,6 @@ using UnityEngine.SceneManagement;
 public class YesButton : MonoBehaviour
 {
     public GameObject[] FalseObjects;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void BossroomButton()
     {
         GameManager.instance.Sizemain = 10f;

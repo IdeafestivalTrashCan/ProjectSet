@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GunCheck : MonoBehaviour
 {
-    public GameObject[] panelF;
-    public GameObject[] panelT;
-    
+    public GameObject Gun;
+    GameObject Yangchoo;
+    private void Start()
+    {
+        Gun = GameObject.Find("GameManager/Player/Gun").gameObject;
+    }
     public void PanelFalse()
     {
-        panelF[0].SetActive(false);
-        panelT[0].SetActive(true);
+        Gun.SetActive(true);
+        Yangchoo = GameObject.Find("Yangchoo");
+        Yangchoo.GetComponent<YangChoo>().NextPage();
         GameManager.instance.PlayerWeapon[1] = true;
     }
 }

@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class SwordCheck : MonoBehaviour
 {
-    public GameObject[] panelF;
-    public GameObject[] panelT;
-    void Start()
+    GameObject origin;
+    GameObject Yangchoo;
+    private void Start()
     {
-        
+        origin = GameObject.Find("GameManager/Player/Origin").gameObject;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Check()
     {
-        
-    }
-
-    public void PanelFalse()
-    {
-        panelF[0].SetActive(false);
-        panelT[0].SetActive(true);
+        origin.SetActive(true);
+        Yangchoo = GameObject.Find("Yangchoo");
+        Yangchoo.GetComponent<YangChoo>().NextPage();
         GameManager.instance.PlayerWeapon[0] = true;
     }
 }
