@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     
     private SpriteRenderer Renderer;
     private bool isJump = true;
-    private float PlayerX;
     private Animator animator;
     private Rigidbody2D rigid;
     private bool isDash = true;
@@ -31,6 +30,8 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
+        GameManager.instance.cam.orthographicSize = GameManager.instance.cameraSize;
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             SceneManager.LoadScene("Tutorial_Scene");
@@ -41,13 +42,8 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Vegetable_Scene 1");
             transform.position = new Vector3(-30, -2, 0);
         }
-        
-        PlayerX = transform.position.x;
 
-        if (transform.position.y <= 1)
-            _Camera.position = new Vector3(PlayerX, 1f, -1f);
-        else
-            _Camera.position = new Vector3(PlayerX, transform.position.y, -1f);
+        
         
         if (Input.GetKey(KeyCode.LeftArrow))
         {

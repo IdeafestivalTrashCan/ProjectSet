@@ -94,8 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9013121916716967168}
   - component: {fileID: 2667445964629521875}
+  - component: {fileID: 8442894309027182939}
   m_Layer: 0
-  m_Name: thunde10 (1)
+  m_Name: OnionAttackL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 4911827916547273393}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.5, w: 0.8660254}
-  m_LocalPosition: {x: -1.62, y: -0.91, z: 0}
+  m_LocalPosition: {x: -1.63, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,12 +163,33 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.775, y: 3.975}
+  m_Size: {x: 4, y: 4.46875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8442894309027182939
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911827916547273393}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e80f898043bf8c4a9494610b8d748fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6748191597062727555
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,8 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3038791737908932652}
   - component: {fileID: 3069438783931147168}
+  - component: {fileID: 7502805757919091133}
   m_Layer: 0
-  m_Name: thunde10
+  m_Name: OnionAttackR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +217,7 @@ Transform:
   m_GameObject: {fileID: 6748191597062727555}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.5, w: 0.8660254}
-  m_LocalPosition: {x: 1.63, y: -0.88, z: 0}
+  m_LocalPosition: {x: 1.63, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -252,6 +275,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7502805757919091133
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748191597062727555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e80f898043bf8c4a9494610b8d748fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8184057809241606666
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +313,7 @@ GameObject:
   - component: {fileID: 3969759729582659870}
   m_Layer: 0
   m_Name: Onion
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +447,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.012769699, y: -2.3280854}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -414,7 +458,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.2, y: 3.2}
+  m_Size: {x: 2.306137, y: 0.0680902}
   m_EdgeRadius: 0
 --- !u!61 &-3010211677484226040
 BoxCollider2D:
@@ -445,10 +489,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.30445027, y: 0}
+  m_Offset: {x: 0.0007510185, y: 0.09479785}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -459,7 +503,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5910997, y: 3.2}
+  m_Size: {x: 1.73001, y: 2.2546687}
   m_EdgeRadius: 0
 --- !u!95 &4117201556009163336
 Animator:
@@ -471,7 +515,7 @@ Animator:
   m_GameObject: {fileID: 8184057809241606666}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 03c0dad987843b04a910f09c34a0dfbf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -506,3 +550,4 @@ MonoBehaviour:
   detectDistance: 0
   atkCur: 0
   atkCool: 1.5
+  atkSize: {x: 4, y: 3}
