@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class YangChoo : NPC
 {
-    [SerializeField] string[] choose;
 
     [Header("무기선택 버튼")]
     [SerializeField] private GameObject sword;

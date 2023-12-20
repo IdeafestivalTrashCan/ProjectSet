@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _Camera;
     [SerializeField] private float Speed;
     [SerializeField] private float JumpPower;
-    
+
+    [Header ("Bool State")]
     private SpriteRenderer Renderer;
-    private bool isJump = true;
+    [SerializeField] private bool isJump = true;
     private Animator animator;
     private Rigidbody2D rigid;
-    private bool isDash = true;
+    [SerializeField] private bool isDash = true;
     
     private void Start()
     {
@@ -31,17 +32,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GameManager.instance.cam.orthographicSize = GameManager.instance.cameraSize;
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SceneManager.LoadScene("Tutorial_Scene");
-            transform.position = new Vector3(-30, -2, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            SceneManager.LoadScene("Vegetable_Scene 1");
-            transform.position = new Vector3(-30, -2, 0);
-        }
 
         
         
@@ -115,8 +105,24 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isIdle", true);
         }
     }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isJump = true;
+            animator.SetBool("isIdle", true);
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            isJump = false;
+            animator.SetBool("isIdle", false);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {

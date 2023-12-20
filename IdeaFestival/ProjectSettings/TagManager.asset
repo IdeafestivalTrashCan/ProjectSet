@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Monster
   - Player_Damge
+  - OneWayPlat
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Monster
-  - 
+  - Player
   - 
   - 
   - 
