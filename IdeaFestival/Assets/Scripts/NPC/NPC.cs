@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
-    GameObject npcCanvas;
+    [SerializeField] protected GameObject npcCanvas;
     [SerializeField] protected GameObject button;
 
     Image ilust;
@@ -15,19 +15,17 @@ public class NPC : MonoBehaviour
 
     [Header("Chat Detail")]
     [SerializeField] protected string[] chatingDetail;
-    protected string[] chooseDetail;
     [Header("Setting")]
     [SerializeField] protected GameObject player;
     [SerializeField] protected bool isChooseNPC;
-    static protected bool isEndChat = false;
-
-    [SerializeField] TextMeshProUGUI[] choice;
 
 
     protected bool isOnChat = false;
 
     [SerializeField] protected int curPage = 0;
     [SerializeField] protected int choosePage = 99;
+    [SerializeField] private int distance;
+
 
     private void Awake()
     {
@@ -37,7 +35,8 @@ public class NPC : MonoBehaviour
     {
         if (IsCheckDistance())
         {
-            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && isChooseNPC && !isEndChat)
+            Debug.Log("인식이 되긴 함;;");
+            if (Input.GetKeyDown(KeyCode.F) && !isOnChat)
             {
                 Debug.Log("대화 시작!");
                 Init(chatingDetail.Length, chatingDetail, false);
@@ -51,9 +50,10 @@ public class NPC : MonoBehaviour
 
     protected void Init(int chatLength, string[] chatDetail, bool isChooseNPC)
     {
+        Debug.Log("출력");
         ScriptSwitch(false);
 
-        npcCanvas = player.transform.Find("NPC Canvas").gameObject;
+        npcCanvas = GameObject.Find("GameManager/Player/NPC Canvas").gameObject;
         button = npcCanvas.transform.Find("ChatPane/Button").gameObject;
 
         ilust = npcCanvas.transform.Find("NPC Ilust").gameObject.GetComponent<Image>();
@@ -72,10 +72,9 @@ public class NPC : MonoBehaviour
         this.isChooseNPC = isChooseNPC;
     }
 
-    protected void ChooseSetting(string[] choiceText, int count)
+    protected void ChooseSetting(int count)
     {
         choosePage = count - 1;
-        chooseDetail = choiceText;
     }
 
 
@@ -85,7 +84,7 @@ public class NPC : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = b1;
     }
 
-    public void NextPage()
+    public virtual void NextPage()
     {
         curPage++;
         if (curPage >= chatingDetail.Length)
@@ -94,7 +93,6 @@ public class NPC : MonoBehaviour
             curPage = 0;
             npcCanvas.SetActive(false);
             ScriptSwitch(true);
-            isEndChat = true;
         }
         else
         {
@@ -105,6 +103,6 @@ public class NPC : MonoBehaviour
 
     protected bool IsCheckDistance()
     {
-        return 6 >= Vector2.Distance(transform.position, player.transform.position);
+        return distance >= Vector2.Distance(transform.position, player.transform.position);
     }
 }
