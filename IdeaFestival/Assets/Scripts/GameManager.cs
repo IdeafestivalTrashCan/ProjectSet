@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject player;
+    public Vector3 aftPlayerTrans;
 
     [SerializeField] public Camera cam;
     public int cameraSize = 6;
@@ -12,10 +14,13 @@ public class GameManager : MonoBehaviour
     public int Cash;
     public bool BossCheck = false;
 
+    public string moveSceneName;
+
     public bool[] PlayerWeapon;
 
     public int PlayerDamage = 30;
     public Transform playerTrans;
+    
 
     private void Awake()
     {

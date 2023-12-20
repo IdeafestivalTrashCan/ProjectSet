@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     
     private void Start()
     {
+        GameManager.instance.player = this.gameObject;
         Renderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();

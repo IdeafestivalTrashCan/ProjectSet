@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Vegetable_Village.unity
     guid: e72884decc835764291060bfc4c43e4e
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 6082d7c9761e1d243a4d7860cd9db0ae
   m_configObjects: {}

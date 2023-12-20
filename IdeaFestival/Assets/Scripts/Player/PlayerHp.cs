@@ -37,6 +37,6 @@ public class PlayerHp : MonoBehaviour
     void Die()
     {
         if (curHp <= 0)
-            Debug.Log("Die");
+            gameObject.SetActive(false);
     }
 }
