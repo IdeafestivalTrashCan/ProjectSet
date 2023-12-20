@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField] public Camera cam;
+    public int cameraSize = 6;
     public Text GameMoney;
     public int Cash;
     public bool BossCheck = false;
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     void Update()
     {

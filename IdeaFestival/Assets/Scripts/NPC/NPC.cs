@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour
     [Header("Setting")]
     [SerializeField] protected GameObject player;
     [SerializeField] protected bool isChooseNPC;
-    protected bool isEndChat = false;
+    static protected bool isEndChat = false;
 
     [SerializeField] TextMeshProUGUI[] choice;
 

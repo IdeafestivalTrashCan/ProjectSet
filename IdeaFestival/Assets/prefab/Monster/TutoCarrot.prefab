@@ -252,6 +252,7 @@ MonoBehaviour:
   detectDistance: 0
   atkCur: 0
   atkCool: 1.5
+  portal: {fileID: 0}
 --- !u!1 &4886815514545865032
 GameObject:
   m_ObjectHideFlags: 0
