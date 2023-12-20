@@ -27,8 +27,16 @@ public class Portal : MonoBehaviour
 
     protected void MoveMap(string SceneName, Vector2 position, int size)
     {
-        player.transform.position = position;
-        SceneManager.LoadScene(SceneName);
+        GameManager.instance.moveSceneName = SceneName;
+        StartCoroutine(Set(sceneName));
+        SceneManager.LoadScene("Loading");
+    }
+
+    IEnumerator Set(string SceneName)
+    {
+        yield return null;
+        GameManager.instance.moveSceneName = SceneName;
+        GameManager.instance.aftPlayerTrans = position;
         GameManager.instance.cameraSize = size;
     }
 }

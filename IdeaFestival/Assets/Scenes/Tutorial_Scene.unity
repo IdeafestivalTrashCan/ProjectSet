@@ -472,7 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   sceneName: Vegetable_ST1
-  position: {x: -2, y: -1.5}
+  position: {x: -2, y: -0.5}
   size: 10
 --- !u!50 &123079263
 Rigidbody2D:
@@ -672,11 +672,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0437577752e4496cab28af01231ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  aftPlayerTrans: {x: 0, y: 0, z: 0}
   cam: {fileID: 1313078250}
   cameraSize: 6
   GameMoney: {fileID: 476672079}
   Cash: 0
   BossCheck: 0
+  moveSceneName: 
   PlayerWeapon: 0000
   PlayerDamage: 30
   playerTrans: {fileID: 0}
@@ -13201,7 +13204,7 @@ GameObject:
   - component: {fileID: 1654802683}
   - component: {fileID: 1654802682}
   - component: {fileID: 1654802688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -14560,6 +14563,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutoCarrot
       objectReference: {fileID: 0}
+    - target: {fileID: 4477652263531887100, guid: 702dc3c6c4ac30f47a6b1ddf51fb0782, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6175012317887926711, guid: 702dc3c6c4ac30f47a6b1ddf51fb0782, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.03
@@ -14600,7 +14607,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8738287110990854438, guid: 702dc3c6c4ac30f47a6b1ddf51fb0782, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
