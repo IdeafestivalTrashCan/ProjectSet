@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    GameObject player;
+    [SerializeField] GameObject player;
     private void Awake()
     {
         player = GameObject.Find("GameManager/Player");
@@ -13,7 +14,7 @@ public class Portal : MonoBehaviour
     {
         if (IsCheckDistance())
             if (Input.GetKeyDown(KeyCode.F))
-                Debug.Log("³¯¾Æ¶ó Ç³¼± »Ï·Î·Õ");
+                SceneManager.LoadScene("MainGame");
     }
     protected bool IsCheckDistance()
     {
