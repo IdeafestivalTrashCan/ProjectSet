@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 
     public Text GameMoney;
     public int Cash;
-    public float Sizemain = 5f;
     public bool BossCheck = false;
 
     public bool[] PlayerWeapon;

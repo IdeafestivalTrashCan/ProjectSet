@@ -25,7 +25,13 @@ public class PlayerHp : MonoBehaviour
     public void TakeDamage(int damage)
     {
         curHp -= damage;
-        Invoke("AttackDelay", 0.25f);
+        GetComponent<SpriteRenderer>().color = Color.red;
+        Invoke("ColorDelay", 0.25f);
+    }
+
+    protected void ColorDelay()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     void Die()

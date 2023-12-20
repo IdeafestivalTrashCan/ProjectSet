@@ -16,7 +16,7 @@ public class YangChoo : NPC
     {
         if (IsCheckDistance())
         {
-            if (Input.GetKeyDown(KeyCode.F) && !isOnChat)
+            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && !isEndChat)
             {
                 Init(chatingDetail.Length, chatingDetail, true); 
                 ChooseSetting(choose, 7);
@@ -39,18 +39,5 @@ public class YangChoo : NPC
         gun = GameObject.Find("GameManager/Player/Gun").gameObject;
 
 
-    }
-    void ChooseSword()
-    {
-        sword.SetActive(true);
-        GameManager.instance.PlayerWeapon[0] = true;
-        NextPage();
-    }
-
-    void ChooseGun()
-    {
-        gun.SetActive(true);
-        GameManager.instance.PlayerWeapon[1] = true;
-        NextPage();
     }
 }

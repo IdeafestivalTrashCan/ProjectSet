@@ -6,17 +6,17 @@ public class Monster : MonoBehaviour
     [Header("Setting")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private int curHp = 100;
-    [SerializeField] private int damage = 5;
+    [SerializeField] protected int damage = 5;
 
     private SpriteRenderer monsterSprite;
     private Animator animator;
-    [SerializeField] private GameObject player;
+    [SerializeField] protected GameObject player;
 
     [Header("CurBoolState")]
     [SerializeField] private bool monsterAttack = true;
     [SerializeField] private bool isAttack = false;
-    [SerializeField] private bool isThinking = false;
 
+    protected bool isAttacking = false;
     [Header("MonsterState")]
     [SerializeField] private bool isNoAttack = true;
     [SerializeField] private bool isChase;
@@ -24,8 +24,8 @@ public class Monster : MonoBehaviour
     private Coroutine curCoroutine;
 
     [Header("Detect, Attack Distance")]
-    [SerializeField] private float attackDistance;
-    [SerializeField] private float detectDistance;
+    [SerializeField] protected float attackDistance;
+    [SerializeField] protected float detectDistance;
 
     [Header("Atk Info")]
     [SerializeField] private float atkCur = 0;
@@ -33,7 +33,7 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
-        Init(5, 3, 100, 8, true);
+        Init(5, 3, 100, 8, 5, true, 1.5f);
     }
 
 
@@ -53,8 +53,8 @@ public class Monster : MonoBehaviour
         if (!isChase && !isAttack)
         {
             transform.Find("WarningSign").gameObject.SetActive(false);
-            if (!isThinking)
-                Think();
+            //if (!isThinking)
+            //    Think();
         }
         else
         {
@@ -109,84 +109,44 @@ public class Monster : MonoBehaviour
             else
             {
                 animator.SetTrigger("Attack");
+                isAttacking = true;
                 Invoke("AttackPlay", 0.2f);
                 atkCur = atkCool;
             }
         }
-        else
+        else if (!isAttacking)
         {
             isAttack = false;
             atkCur = 0;
         }
     }
-    void AttackPlay()
+    protected virtual void AttackPlay()
     {
         Debug.Log("ATtack GOOGOGOGO");
+        isAttacking = false;
         if (IsCheckDistance(attackDistance))
         {
             player.GetComponent<PlayerHp>().TakeDamage(damage);
         }
 
     }
-    protected void Init(float detectDistance, float attackDistance, int hp, int damage, bool isNoAttack)
+    protected void Init(float detectDistance, float attackDistance, int hp, int damage, int speed, bool isNoAttack, float atkCool)
     {
         monsterSprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         player = GameObject.Find("Player");
         this.damage = damage;
-
+        moveSpeed = speed;
         this.detectDistance = detectDistance;
         this.attackDistance = attackDistance;
         curHp = hp;
+        this.atkCool = atkCool;
         this.isNoAttack = isNoAttack;
 
     }
-    protected void Think()
-    {
-        isThinking = true;
-        int patternIndex = Random.Range(0, 3);
 
-        switch (patternIndex)
-        {
-            case 0:
-                curCoroutine = StartCoroutine(IdleCoroutine());
-                break;
-            case 1:
-                curCoroutine = StartCoroutine(WalkCoroutine(new Vector3(1, transform.position.y)));
-                monsterSprite.flipX = true;
-                break;
-            case 2:
-                curCoroutine = StartCoroutine(WalkCoroutine(new Vector3(-1, transform.position.y)));
-                monsterSprite.flipX = false;
-                break;
-        }
-    }
-    protected IEnumerator IdleCoroutine()
-    {
-        animator.SetBool("isIdle", true);
-        yield return new WaitForSeconds(0.5f);
-        animator.SetBool("isIdle", false);
-        Think();
-    }
-    protected IEnumerator WalkCoroutine(Vector3 direction)
-    {
-        animator.SetBool("isWalk", true);
-        for (int i = 0; i < 100; i++)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, direction, 0.05f);
-            yield return new WaitForSeconds(0.01f);
-        }
-        animator.SetBool("isWalk", false);
-        Think();
-    }
 
-    IEnumerator WaitForAttackAnimation()
-    {
-        yield return new WaitForSeconds(0.7f);
-        isAttack = false;
-    }
-
-    private bool IsCheckDistance(float distance)
+    protected bool IsCheckDistance(float distance)
     {
         return distance >= Vector2.Distance(transform.position, player.transform.position);
     }
@@ -201,7 +161,7 @@ public class Monster : MonoBehaviour
         Invoke("ColorDelay", 0.25f);
     }
 
-    private void ColorDelay()
+    protected void ColorDelay()
     {
         monsterSprite.color = Color.white;
     }
