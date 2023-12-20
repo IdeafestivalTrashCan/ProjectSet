@@ -12,6 +12,8 @@ public class YangChoo : NPC
     [SerializeField] private GameObject sword;
     [SerializeField] private GameObject gun;
 
+    static protected bool isEndChat = false;
+
     void Update()
     {
         if (IsCheckDistance())
@@ -19,7 +21,7 @@ public class YangChoo : NPC
             if (Input.GetKeyDown(KeyCode.F) && !isOnChat && !isEndChat)
             {
                 Init(chatingDetail.Length, chatingDetail, true); 
-                ChooseSetting(choose, 7);
+                ChooseSetting(7);
                 isOnChat = true;
             }
 
@@ -29,6 +31,25 @@ public class YangChoo : NPC
             {
                 button.SetActive(true);
             }
+        }
+
+    }
+
+    public override void NextPage()
+    {
+        curPage++;
+        if (curPage >= chatingDetail.Length)
+        {
+            isOnChat = false;
+            curPage = 0;
+            isEndChat = true;
+            npcCanvas.SetActive(false);
+            ScriptSwitch(true);
+            button.SetActive(false);
+        }
+        else
+        {
+            chat.text = chatingDetail[curPage];
         }
 
     }
