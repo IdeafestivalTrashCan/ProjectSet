@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Vegetable_ST1.unity
     guid: 0a8ac4a920f1d484d8869e2d05df0391
+  - enabled: 1
+    path: Assets/Scenes/Vegetable_Village.unity
+    guid: e72884decc835764291060bfc4c43e4e
   m_configObjects: {}
