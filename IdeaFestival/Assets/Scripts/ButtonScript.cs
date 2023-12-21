@@ -17,6 +17,11 @@ public class ButtonScript : MonoBehaviour
         StartCoroutine(Set(sceneName, position, useRemainMark));
         SceneManager.LoadScene("Loading");
     }
+
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
     IEnumerator Set(string SceneName, Vector2 position, bool useRemainMark)
     {
 

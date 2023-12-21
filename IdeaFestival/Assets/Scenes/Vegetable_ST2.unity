@@ -7459,7 +7459,7 @@ MonoBehaviour:
   sceneName: Vegetable_Aisle1
   position: {x: -16, y: -3.5}
   size: 6
-  useRemainMark: 0
+  useRemainMark: 1
 --- !u!50 &1254784173
 Rigidbody2D:
   serializedVersion: 4
@@ -8120,6 +8120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
+  maxHp: 200
   curHp: 200
   objects: []
   remainCount: {fileID: 1462484874}

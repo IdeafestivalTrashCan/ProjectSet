@@ -23,7 +23,6 @@ public class SceneLoad : MonoBehaviour
 
         yield return null;
         operation = SceneManager.LoadSceneAsync(GameManager.instance.moveSceneName);
-        GameManager.instance.player.SetActive(false);
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)

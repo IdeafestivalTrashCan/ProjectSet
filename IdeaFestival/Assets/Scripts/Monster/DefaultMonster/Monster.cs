@@ -151,7 +151,7 @@ public class Monster : MonoBehaviour
         return distance >= Vector2.Distance(transform.position, player.transform.position);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         monsterSprite.color = Color.red;
         curHp -= damage;

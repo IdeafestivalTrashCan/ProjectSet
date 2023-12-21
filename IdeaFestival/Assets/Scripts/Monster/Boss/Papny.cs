@@ -7,6 +7,8 @@ public class Papny : Monster
     public int maxHp;
     [SerializeField]bool isAlive = false;
     new bool isAttacking = false;
+    private bool isDeath;
+
     private void Start()
     {
         Init(15, 7.5f, 2000, 10, 2, false, 6);
@@ -16,8 +18,11 @@ public class Papny : Monster
     private void Update()
     {
         Alive();
-        Chase();
-        Attack();
+        if (!isDeath)
+        {
+            Chase();
+            Attack();
+        }
     }
 
     void Alive()
@@ -95,4 +100,23 @@ public class Papny : Monster
         isAttacking = false;
     }
 
+    public override void TakeDamage(int damage)
+    {
+        monsterSprite.color = Color.red;
+        curHp -= damage;
+
+        if (curHp <= 0)
+        {
+            isDeath = true;
+            StartCoroutine("Die");
+        }
+        Invoke("ColorDelay", 0.25f);
+    }
+
+    IEnumerator Die()
+    {
+        animator.SetTrigger("Die");
+        yield return new WaitForSeconds(1.2f);
+        gameObject.SetActive(false);
+    }
 }

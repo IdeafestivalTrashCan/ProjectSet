@@ -18,6 +18,9 @@ public class PapnyManager : MonoBehaviour
 
     void Update()
     {
+        
         papnyHPBar.value = (float) papny.curHp / papny.maxHp;
+        if (papny.curHp <= 0)
+            papnyHP.SetActive(false);
     }
 }
