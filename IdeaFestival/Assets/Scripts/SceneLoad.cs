@@ -9,24 +9,26 @@ public class SceneLoad : MonoBehaviour
 {
     public Slider progressbar;
     public TextMeshProUGUI loadText;
+    AsyncOperation operation;
 
     void Start()
     {
         StartCoroutine(LoadScene());
     }
 
-   
+
     IEnumerator LoadScene()
     {
         Debug.Log("그래그래");
-        GameManager.instance.player.SetActive(false);
+
         yield return null;
-        AsyncOperation operation = SceneManager.LoadSceneAsync(GameManager.instance.moveSceneName);
+        operation = SceneManager.LoadSceneAsync(GameManager.instance.moveSceneName);
+        GameManager.instance.player.SetActive(false);
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.001f);
             if (progressbar.value < 0.9f)
             {
                 progressbar.value = Mathf.MoveTowards(progressbar.value, 0.9f, Time.deltaTime);
@@ -38,16 +40,23 @@ public class SceneLoad : MonoBehaviour
 
             if (progressbar.value >= 1f)
             {
-                loadText.text = "Press SpaceBar";
+                loadText.text = "Loading!";
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && progressbar.value >= 1f && operation.progress >= 0.9f)
+            if (progressbar.value >= 1f && operation.progress >= 0.9f)
             {
-
-                GameManager.instance.player.SetActive(true);
-                GameManager.instance.player.transform.position = GameManager.instance.aftPlayerTrans;
-                operation.allowSceneActivation = true;
+                StartCoroutine(Load());
             }
         }
+    }
+
+    IEnumerator Load()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.player.transform.position = GameManager.instance.aftPlayerTrans;
+        GameManager.instance.player.GetComponent<PlayerController>().isDash = true;
+        operation.allowSceneActivation = true;
+        GameManager.instance.player.SetActive(true);
+
     }
 }

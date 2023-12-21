@@ -41,7 +41,7 @@ public class SwordController : MonoBehaviour
             foreach(Collider2D collider in rightCollider)
             {
                 if (collider.tag == "Monster")
-                    collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage/2);
+                    collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
             }
 
             for (int i = 0; i < 30; i++)
@@ -65,7 +65,7 @@ public class SwordController : MonoBehaviour
             foreach (Collider2D collider in leftCollider)
             {
                 if (collider.CompareTag("Monster")) 
-                    collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage/2);
+                    collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
             }
 
             for (int i = 0; i < 30; i++)

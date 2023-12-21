@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class NPC : MonoBehaviour
 {
     [SerializeField] protected GameObject npcCanvas;
-    [SerializeField] protected GameObject button;
+    [SerializeField] public GameObject button;
 
     Image ilust;
     public Sprite ilustImage;

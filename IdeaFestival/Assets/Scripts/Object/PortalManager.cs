@@ -5,10 +5,12 @@ using UnityEngine;
 public class PortalManager : MonoBehaviour
 {
     [SerializeField] GameObject portal;
+    [SerializeField] GameObject[] objects;
 
     private void Update()
     {
-        if(GameObject.FindGameObjectsWithTag("Monster") == null)
+        objects = GameObject.FindGameObjectsWithTag("Monster");
+        if (objects.Length == 0)
         {
             portal.SetActive(true);
         }
