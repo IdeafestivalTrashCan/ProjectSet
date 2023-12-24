@@ -20,11 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isJump = true;
     private Animator animator;
     private Rigidbody2D rigid;
-    [SerializeField] private bool isDash = true;
+    [SerializeField] public bool isDash = true;
     
     private void Start()
     {
-        GameManager.instance.player = this.gameObject;
+        GameManager.instance.player = gameObject;
         Renderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
+        GameManager.instance.player = gameObject;
         GameManager.instance.cam.orthographicSize = GameManager.instance.cameraSize;
 
         

@@ -4,22 +4,22 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [Header("Setting")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private int curHp = 100;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] public int curHp = 100;
     [SerializeField] protected int damage = 5;
 
-    private SpriteRenderer monsterSprite;
-    private Animator animator;
+    protected SpriteRenderer monsterSprite;
+    protected Animator animator;
     [SerializeField] protected GameObject player;
 
     [Header("CurBoolState")]
-    [SerializeField] private bool monsterAttack = true;
-    [SerializeField] private bool isAttack = false;
+    [SerializeField] protected bool monsterAttack = true;
+    [SerializeField] protected bool isAttack = false;
 
     protected bool isAttacking = false;
     [Header("MonsterState")]
     [SerializeField] private bool isNoAttack = true;
-    [SerializeField] private bool isChase;
+    [SerializeField] protected bool isChase;
 
     private Coroutine curCoroutine;
 
@@ -126,7 +126,7 @@ public class Monster : MonoBehaviour
         isAttacking = false;
         if (IsCheckDistance(attackDistance))
         {
-            player.GetComponent<PlayerHp>().TakeDamage(damage);
+            player.GetComponent<PlayerUI>().TakeDamage(damage);
         }
 
     }
@@ -151,7 +151,7 @@ public class Monster : MonoBehaviour
         return distance >= Vector2.Distance(transform.position, player.transform.position);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         monsterSprite.color = Color.red;
         curHp -= damage;

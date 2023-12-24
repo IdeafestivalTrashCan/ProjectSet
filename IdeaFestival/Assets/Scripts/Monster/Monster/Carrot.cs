@@ -6,6 +6,6 @@ public class Carrot : Monster
 {
     private void Start()
     {
-        Init(7, 2.5f, 30, 5, 5, false, 2); 
+        Init(9, 2.5f, 40, 5, 4, false, 2); 
     }
 }

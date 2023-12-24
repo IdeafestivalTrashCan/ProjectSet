@@ -60,7 +60,7 @@ public class GunController : MonoBehaviour
             StartCoroutine(GunDaley());
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.A)&& Input.GetKeyDown(KeyCode.R))
             aM.Reload();
     }
 

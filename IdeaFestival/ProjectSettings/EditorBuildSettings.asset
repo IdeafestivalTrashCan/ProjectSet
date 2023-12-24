@@ -5,18 +5,27 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MainGame.unity
-    guid: db5297fe426534e7594702ace82683d0
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b07bc02056ad1dc49905882eae039640
   - enabled: 1
     path: Assets/Scenes/Tutorial_Scene.unity
     guid: 1e5ccfa708e47f94882d3039e193463c
   - enabled: 1
+    path: Assets/Scenes/Vegetable_Village.unity
+    guid: e72884decc835764291060bfc4c43e4e
+  - enabled: 1
     path: Assets/Scenes/Vegetable_ST1.unity
     guid: 0a8ac4a920f1d484d8869e2d05df0391
   - enabled: 1
-    path: Assets/Scenes/Vegetable_Village.unity
-    guid: e72884decc835764291060bfc4c43e4e
+    path: Assets/Scenes/Vegetable_ST2.unity
+    guid: b04e5e9418f63194fbab323040bcdde8
+  - enabled: 1
+    path: Assets/Scenes/Vegetable_Aisle1.unity
+    guid: 1d7c5400af3da8e4ca0cd4090bcad550
+  - enabled: 1
+    path: Assets/Scenes/Vegetable_Boss.unity
+    guid: 1572811ee38d3b7408b94ee50b04d241
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 6082d7c9761e1d243a4d7860cd9db0ae

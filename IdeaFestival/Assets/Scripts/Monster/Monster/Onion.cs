@@ -18,7 +18,7 @@ public class Onion : Monster
     }
     private void Start()
     {
-        Init(7, 3, 30, 10, 3, false, 5);
+        Init(9, 3, 35, 10, 3, false, 5);
     }
 
     protected override void AttackPlay()
@@ -38,12 +38,12 @@ public class Onion : Monster
             foreach (Collider2D collider in atkArrR)
             {
                 if(collider.tag == "Player")
-                    player.GetComponent<PlayerHp>().TakeDamage(damage);
+                    player.GetComponent<PlayerUI>().TakeDamage(damage);
             }
             foreach (Collider2D collider in atkArrL)
             {
                 if (collider.tag == "Player")
-                    player.GetComponent<PlayerHp>().TakeDamage(damage);
+                    player.GetComponent<PlayerUI>().TakeDamage(damage);
             }
         }
     }

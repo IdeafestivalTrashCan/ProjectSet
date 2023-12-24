@@ -11,16 +11,22 @@ public class YangChoo : NPC
     [SerializeField] private GameObject sword;
     [SerializeField] private GameObject gun;
 
-    static protected bool isEndChat = false;
+    protected bool isEndChat = false;
 
     void Update()
     {
         if (IsCheckDistance())
         {
-            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && !isEndChat)
+            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && !isEndChat && isChooseNPC)
             {
                 Init(chatingDetail.Length, chatingDetail, true); 
-                ChooseSetting(7);
+                ChooseSetting(15);
+                isOnChat = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.F) && !isOnChat && !isEndChat && !isChooseNPC)
+            {
+                Init(chatingDetail.Length, chatingDetail, true);
                 isOnChat = true;
             }
 
