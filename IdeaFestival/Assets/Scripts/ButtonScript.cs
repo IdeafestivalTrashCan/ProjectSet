@@ -11,6 +11,8 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] int size;
     [SerializeField] bool useRemainMark;
 
+    [SerializeField] GameObject settingPanel;
+
     public void StartButton()
     {
         GameManager.instance.moveSceneName = sceneName;
@@ -21,6 +23,14 @@ public class ButtonScript : MonoBehaviour
     public void ExitButton()
     {
         Application.Quit();
+    }
+    public void SettingOpenButton()
+    {
+        settingPanel.SetActive(true);
+    }
+    public void SettingExitButton()
+    {
+        settingPanel.SetActive(false);
     }
     IEnumerator Set(string SceneName, Vector2 position, bool useRemainMark)
     {
