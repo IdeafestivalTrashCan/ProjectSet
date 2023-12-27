@@ -23,7 +23,6 @@ public class PlayerUI : MonoBehaviour
     {
         objects = GameObject.FindGameObjectsWithTag("Monster");
         remainCount.SetActive(GameManager.instance.useRemainMark);
-        Debug.Log(GameManager.instance.useRemainMark);
         remainCountText.text = "   " + objects.Length;
 
         if (curHp > 200)

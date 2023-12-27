@@ -19,6 +19,8 @@ public class SwordController : MonoBehaviour
     private bool isSprite;
     private bool SwordEulerAngles = false;
 
+    [SerializeField] private AudioClip slashClip;
+
     void Start()
     {
         CharacterFilpXCheck = GetComponent<SpriteRenderer>();
@@ -35,6 +37,7 @@ public class SwordController : MonoBehaviour
             GameManager.instance.PlayerWeapon[0] == true)
         {
             DelayX = false;
+            AudioManager.instance.SFXPlay("Swing", slashClip);
 
             rightCollider = Physics2D.OverlapBoxAll(transform.Find("SlashR").position, boxSize, 0);
 
@@ -59,6 +62,7 @@ public class SwordController : MonoBehaviour
             GameManager.instance.PlayerWeapon[0] == true)
         {
             DelayX = false;
+            AudioManager.instance.SFXPlay("Swing", slashClip);
 
             leftCollider = Physics2D.OverlapBoxAll(transform.Find("SlashL").position, boxSize, 0);
 

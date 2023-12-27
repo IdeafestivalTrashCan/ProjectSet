@@ -3,20 +3,21 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] AudioSource bgm;
     [SerializeField] Slider mainSlider;
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider soundSlider;
-    void Start()
-    {
-        bgm.Play();
-    }
 
     void Update()
     {
-        bgm.volume = (float)(soundSlider.value * mainSlider.value) / 10000;
-        GameManager.instance.mainVol = (int)mainSlider.value;
-        GameManager.instance.bgmVol = (int)bgmSlider.value;
-        GameManager.instance.soundVol = (int)soundSlider.value;
+        AudioManager.instance.mainVol = (int)mainSlider.value;
+        AudioManager.instance.bgmVol = (int)bgmSlider.value;
+        AudioManager.instance.effectVol = (int)soundSlider.value;
+    }
+
+    private void OnEnable()
+    {
+        mainSlider.value = AudioManager.instance.mainVol;
+        bgmSlider.value = AudioManager.instance.bgmVol;
+        soundSlider.value = AudioManager.instance.effectVol;
     }
 }

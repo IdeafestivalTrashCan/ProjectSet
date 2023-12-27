@@ -6,6 +6,8 @@ public class Gate : MonoBehaviour
     [SerializeField] protected GameObject player;
     [SerializeField] private float distance;
     [SerializeField] bool isOpen;
+
+    [SerializeField] GameObject fMark;
     private void Awake()
     {
         player = GameObject.Find("GameManager/Player");
@@ -15,6 +17,9 @@ public class Gate : MonoBehaviour
         if (IsCheckDistance())
         {
             Debug.Log("ÀÎ½ÄÀÌ µÇ±ä ÇÔ;;");
+            if(!isOpen)
+                fMark.SetActive(true);
+            else fMark.SetActive(false);
             if (Input.GetKeyDown(KeyCode.F) && !isOpen)
             {
                 Debug.Log("µþ±ï");
@@ -26,7 +31,7 @@ public class Gate : MonoBehaviour
     {
         Debug.Log(Vector2.Distance(transform.position, player.transform.position));
         return distance >= Vector2.Distance(transform.position, player.transform.position);
-        
+
     }
 
     IEnumerator Open()
@@ -35,7 +40,7 @@ public class Gate : MonoBehaviour
         while (transform.position.y < 20)
         {
             yield return new WaitForSeconds(0.05f);
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x ,transform.position.y + 0.2f), 0.5f);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y + 0.2f), 0.5f);
         }
     }
 }
