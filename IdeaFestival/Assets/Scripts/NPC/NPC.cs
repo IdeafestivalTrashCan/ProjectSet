@@ -103,6 +103,10 @@ public class NPC : MonoBehaviour
 
     protected bool IsCheckDistance()
     {
-        return distance >= Vector2.Distance(transform.position, player.transform.position);
+        if (!player.GetComponent<PlayerSetting>().isPause)
+        {
+            return distance >= Vector2.Distance(transform.position, player.transform.position);
+        }
+        return false;
     }
 }

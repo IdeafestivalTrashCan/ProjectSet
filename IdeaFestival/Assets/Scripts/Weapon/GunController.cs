@@ -15,7 +15,8 @@ public class GunController : MonoBehaviour
     private bool isSprite;
     private bool isGun = true;
     private Animator animator;
-    
+    [SerializeField] private AudioClip FireClip;
+
     private void Awake()
     {
         ammoUI = GameObject.Find("GameManager/PlayerUI/Ammo");
@@ -56,7 +57,7 @@ public class GunController : MonoBehaviour
                 bulletRb.AddForce(Vector2.left * 30, ForceMode2D.Impulse);
             else
                 bulletRb.AddForce(Vector2.right * 30, ForceMode2D.Impulse);
-            
+            AudioManager.instance.SFXPlay("Swing", FireClip);
             StartCoroutine(GunDaley());
         }
 

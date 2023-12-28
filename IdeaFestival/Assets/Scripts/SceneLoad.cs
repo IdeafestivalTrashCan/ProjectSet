@@ -54,6 +54,7 @@ public class SceneLoad : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.player.transform.position = GameManager.instance.aftPlayerTrans;
         GameManager.instance.player.GetComponent<PlayerController>().isDash = true;
+        GameManager.instance.player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         operation.allowSceneActivation = true;
         GameManager.instance.player.SetActive(true);
 

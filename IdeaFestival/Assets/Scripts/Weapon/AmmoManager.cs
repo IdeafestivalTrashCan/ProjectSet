@@ -11,6 +11,8 @@ public class AmmoManager : MonoBehaviour
     Image ammoImage;
     [SerializeField] int maxAmmo = 6;
     [SerializeField] int curAmmo = 6;
+    [SerializeField] private AudioClip reloadClip;
+
     void Awake()
     {
         ammoImage = GetComponent<Image>();
@@ -43,7 +45,7 @@ public class AmmoManager : MonoBehaviour
                 ammoImage.sprite = Ammo[6];
                 break;
             default:
-                curAmmo = 0;
+                curAmmo = 6;
                 break;
 
         }
@@ -53,6 +55,7 @@ public class AmmoManager : MonoBehaviour
     public void Reload()
     {
         curAmmo = maxAmmo;
+        AudioManager.instance.SFXPlay("Swing", reloadClip);
     }
 
     public void Fire()

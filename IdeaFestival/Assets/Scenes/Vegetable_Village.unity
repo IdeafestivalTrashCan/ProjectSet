@@ -382,6 +382,9 @@ MonoBehaviour:
   PlayerWeapon: 0000
   PlayerDamage: 30
   playerTrans: {fileID: 0}
+  mainVol: 0
+  bgmVol: 0
+  soundVol: 0
 --- !u!4 &191653472
 Transform:
   m_ObjectHideFlags: 0

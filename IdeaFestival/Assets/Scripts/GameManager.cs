@@ -20,10 +20,6 @@ public class GameManager : MonoBehaviour
     public int PlayerDamage = 30;
     public Transform playerTrans;
 
-    public int mainVol;
-    public int bgmVol;
-    public int soundVol;
-
     private void Awake()
     {
         if (instance == null)
