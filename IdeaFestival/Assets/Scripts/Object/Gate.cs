@@ -16,20 +16,17 @@ public class Gate : MonoBehaviour
     {
         if (IsCheckDistance())
         {
-            Debug.Log("ÀÎ½ÄÀÌ µÇ±ä ÇÔ;;");
             if(!isOpen)
                 fMark.SetActive(true);
             else fMark.SetActive(false);
             if (Input.GetKeyDown(KeyCode.F) && !isOpen)
             {
-                Debug.Log("µþ±ï");
                 StartCoroutine(Open());
             }
         }
     }
     protected bool IsCheckDistance()
     {
-        Debug.Log(Vector2.Distance(transform.position, player.transform.position));
         return distance >= Vector2.Distance(transform.position, player.transform.position);
 
     }

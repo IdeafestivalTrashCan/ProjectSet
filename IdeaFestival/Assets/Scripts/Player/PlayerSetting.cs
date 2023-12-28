@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerSetting : MonoBehaviour
 {
-    bool isPause;
+    public bool isPause;
 
-    [SerializeField] GameObject pause;
-    [SerializeField] GameObject setting;
+    public GameObject pause;
+    public GameObject setting;
+
+
 
     void Update()
     {
@@ -15,14 +17,20 @@ public class PlayerSetting : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                isPause = true;
+                Time.timeScale = 0f;
+                pause.SetActive(true);
+
 
             }
         }
-        if (isPause)
+        else if (isPause)
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) 
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                
+                isPause = false;
+                Time.timeScale = 1f;
+                pause.SetActive(false);
             }
         }
     }

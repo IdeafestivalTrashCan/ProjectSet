@@ -35,7 +35,7 @@ public class PlayerUI : MonoBehaviour
     {
         curHp -= damage;
         GetComponent<SpriteRenderer>().color = Color.red;
-        Invoke("ColorDelay", 0.25f);
+        Invoke("ColorDelay", 0.1f);
     }
 
     protected void ColorDelay()

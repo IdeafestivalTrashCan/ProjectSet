@@ -58,12 +58,10 @@ public class AudioManager : MonoBehaviour
         bgSound.loop = true;
         bgSound.volume = bgmVol * mainVol / 10000;
         bgSound.Play();
-        Debug.Log(bgSound+""+clip);
     }
 
     private void Update()
     {
-        Debug.Log((float)(bgmVol * mainVol) / 10000);
         bgSound.volume = (float)(bgmVol * mainVol) / 10000;
         realEffectVol = (float)(effectVol * mainVol) / 10000;
     }
