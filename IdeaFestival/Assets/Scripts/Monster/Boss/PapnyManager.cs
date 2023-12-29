@@ -11,8 +11,8 @@ public class PapnyManager : MonoBehaviour
     void Start()
     {
         papny = GameObject.Find("Papny").GetComponent<Papny>();
-        papnyHP = GameObject.Find("GameManager/PlayerUI/Boss");
-        papnyHPBar = GameObject.Find("GameManager/PlayerUI/Boss/BossHP").GetComponent<Slider>();
+        papnyHP = GameObject.Find("GameManager/Player/PlayerUI/Boss");
+        papnyHPBar = GameObject.Find("GameManager/Player/PlayerUI/Boss/BossHP").GetComponent<Slider>();
         papnyHP.SetActive(true);
     }
 

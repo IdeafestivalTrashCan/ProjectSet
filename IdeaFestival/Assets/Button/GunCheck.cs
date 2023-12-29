@@ -11,7 +11,7 @@ public class GunCheck : MonoBehaviour
     private void Start()
     {
         Gun = GameObject.Find("GameManager/Player/Gun").gameObject;
-        ammoUI = GameObject.Find("GameManager/PlayerUI/Ammo");
+        ammoUI = GameObject.Find("GameManager/Player/PlayerUI/Ammo");
     }
     public void PanelFalse()
     {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CinemaController : MonoBehaviour
 {
     CinemachineVirtualCamera cam;
+    
     void Start()
     {
         cam = GetComponent<CinemachineVirtualCamera>();

@@ -9,7 +9,7 @@ public class YesButton : MonoBehaviour
     private GameObject ammoUI;
     private void Awake()
     {
-        ammoUI = GameObject.Find("GameManager/PlayerUI/Ammo").GetComponent<GameObject>();
+        ammoUI = GameObject.Find("GameManager/Player/PlayerUI/Ammo").GetComponent<GameObject>();
     }
     public void BossroomButton()
     {

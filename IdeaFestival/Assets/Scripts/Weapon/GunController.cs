@@ -19,7 +19,7 @@ public class GunController : MonoBehaviour
 
     private void Awake()
     {
-        ammoUI = GameObject.Find("GameManager/PlayerUI/Ammo");
+        ammoUI = GameObject.Find("GameManager/Player/PlayerUI/Ammo");
         aM = ammoUI.GetComponent<AmmoManager>();
         GunSpriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
