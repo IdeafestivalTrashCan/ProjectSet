@@ -20,8 +20,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isJump = true;
     private Animator animator;
     private Rigidbody2D rigid;
-    [SerializeField] public bool isDash = true;
-    
+
+    [Header("DashState")]
+    [SerializeField] public bool canDash;
+    [SerializeField] private bool isDashing;
+    [SerializeField] private float dashingPower = 24;
+    [SerializeField] private float dashingTime = 0.2f;
+    [SerializeField] private float dashingCoolDown = 1f;
+
+
     private void Start()
     {
         GameManager.instance.player = gameObject;
@@ -35,8 +42,10 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.player = gameObject;
         GameManager.instance.cam.orthographicSize = GameManager.instance.cameraSize;
 
-        
-        
+
+        if (isDashing)
+            return;
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             animator.SetBool("isRun", true);
@@ -62,42 +71,30 @@ public class PlayerController : MonoBehaviour
             rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && canDash)
         {
-            Dash(rigid, Renderer.flipX);
+            StartCoroutine(Dash(Renderer.flipX));
         }
     }
-    
-    private void Dash(Rigidbody2D rb, bool sr)
+
+    private IEnumerator Dash(bool isFlip)
     {
-        if (isDash)
-        {
-            isDash = false;
-
-            StartCoroutine(DashDelayTime());
-
-            if (sr)
-                rb.velocity = Vector2.left * 7;
-            else
-                rb.velocity = Vector2.right * 7;
-            
-            StartCoroutine(StopMovement(rb));
-        }
+        canDash = false;
+        isDashing = true;
+        float originalGraviry = rigid.gravityScale;
+        rigid.gravityScale = 0f;
+        if (isFlip)
+            rigid.velocity = new Vector3(-dashingPower, 0f);
+        else
+            rigid.velocity = new Vector3(dashingPower, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        rigid.velocity = Vector3.zero;
+        rigid.gravityScale = originalGraviry;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCoolDown);
+        canDash = true;
     }
     
-    private IEnumerator StopMovement(Rigidbody2D rb)
-    {
-        yield return new WaitForSeconds(0.5f); 
-
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f;
-    }
-
-    private IEnumerator DashDelayTime()
-    {
-        yield return new WaitForSeconds(1f);
-        isDash = true;
-    }
 
     private void OnCollisionStay2D(Collision2D other)
     {

@@ -76,3 +76,6 @@ TagManager:
   - name: Absolute
     uniqueID: 1773058155
     locked: 0
+  - name: Setting
+    uniqueID: 2257938907
+    locked: 0

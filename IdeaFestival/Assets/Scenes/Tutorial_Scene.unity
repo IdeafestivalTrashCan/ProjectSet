@@ -12817,7 +12817,7 @@ Transform:
   m_GameObject: {fileID: 1053235744}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.6, y: 50.6, z: -35.916473}
+  m_LocalPosition: {x: -19.5, y: 0.5, z: -35.916473}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15267,7 +15267,11 @@ MonoBehaviour:
   Speed: 5
   JumpPower: 10
   isJump: 1
-  isDash: 1
+  canDash: 0
+  isDashing: 0
+  dashingPower: 24
+  dashingTime: 0.2
+  dashingCoolDown: 1
 --- !u!50 &1427855546
 Rigidbody2D:
   serializedVersion: 4
@@ -19046,8 +19050,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8738287110990854438, guid: 702dc3c6c4ac30f47a6b1ddf51fb0782, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
