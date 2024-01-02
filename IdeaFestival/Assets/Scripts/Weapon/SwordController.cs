@@ -31,55 +31,111 @@ public class SwordController : MonoBehaviour
         isSprite = CharacterFilpXCheck.flipX;
 
         FlipXCheck();
-
-        if (Input.GetKeyDown(KeyCode.X) &&
-            DelayX == true && isSprite == false &&
-            GameManager.instance.PlayerWeapon[0] == true)
+        if (GameManager.instance.isKeyMode)
         {
-            DelayX = false;
-            AudioManager.instance.SFXPlay("Swing", slashClip);
 
-            rightCollider = Physics2D.OverlapBoxAll(transform.Find("SlashR").position, boxSize, 0);
-
-            foreach(Collider2D collider in rightCollider)
+            if (Input.GetKeyDown(KeyCode.X) &&
+                DelayX == true && isSprite == false &&
+                GameManager.instance.PlayerWeapon[0] == true)
             {
-                if (collider.tag == "Monster")
-                    collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
+                DelayX = false;
+                AudioManager.instance.SFXPlay("Swing", slashClip);
+
+                rightCollider = Physics2D.OverlapBoxAll(transform.Find("SlashR").position, boxSize, 0);
+
+                foreach (Collider2D collider in rightCollider)
+                {
+                    if (collider.tag == "Monster")
+                        collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
+                }
+
+                for (int i = 0; i < 30; i++)
+                    SwordOrigin.Rotate(0f, 0f, -2.3f);
+
+                Slash[0].SetActive(true);
+                DamgeLine[0].SetActive(true);
+
+                Invoke("Delay", 0.3f);
+                SwordEulerAngles = false;
             }
 
-            for (int i = 0; i < 30; i++)
-                SwordOrigin.Rotate(0f, 0f, -2.3f);
+            if (Input.GetKeyDown(KeyCode.X) &&
+                DelayX == true && isSprite == true &&
+                GameManager.instance.PlayerWeapon[0] == true)
+            {
+                DelayX = false;
+                AudioManager.instance.SFXPlay("Swing", slashClip);
 
-            Slash[0].SetActive(true);
-            DamgeLine[0].SetActive(true);
+                leftCollider = Physics2D.OverlapBoxAll(transform.Find("SlashL").position, boxSize, 0);
 
-            Invoke("Delay", 0.3f);
-            SwordEulerAngles = false;
+                foreach (Collider2D collider in leftCollider)
+                {
+                    if (collider.CompareTag("Monster"))
+                        collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
+                }
+
+                for (int i = 0; i < 30; i++)
+                    SwordOrigin.Rotate(0f, 0f, +2.3f);
+
+                Slash[1].SetActive(true);
+                DamgeLine[1].SetActive(true);
+
+                Invoke("Delay", 0.3f);
+                SwordEulerAngles = true;
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.X) &&
-            DelayX == true && isSprite == true &&
-            GameManager.instance.PlayerWeapon[0] == true)
+        else
         {
-            DelayX = false;
-            AudioManager.instance.SFXPlay("Swing", slashClip);
 
-            leftCollider = Physics2D.OverlapBoxAll(transform.Find("SlashL").position, boxSize, 0);
-
-            foreach (Collider2D collider in leftCollider)
+            if (Input.GetButtonDown("attack") &&
+                DelayX == true && isSprite == false &&
+                GameManager.instance.PlayerWeapon[0] == true)
             {
-                if (collider.CompareTag("Monster")) 
-                    collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
+                DelayX = false;
+                AudioManager.instance.SFXPlay("Swing", slashClip);
+
+                rightCollider = Physics2D.OverlapBoxAll(transform.Find("SlashR").position, boxSize, 0);
+
+                foreach (Collider2D collider in rightCollider)
+                {
+                    if (collider.tag == "Monster")
+                        collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
+                }
+
+                for (int i = 0; i < 30; i++)
+                    SwordOrigin.Rotate(0f, 0f, -2.3f);
+
+                Slash[0].SetActive(true);
+                DamgeLine[0].SetActive(true);
+
+                Invoke("Delay", 0.3f);
+                SwordEulerAngles = false;
             }
 
-            for (int i = 0; i < 30; i++)
-                SwordOrigin.Rotate(0f, 0f, +2.3f);
+            if (Input.GetButtonDown("attack") &&
+                DelayX == true && isSprite == true &&
+                GameManager.instance.PlayerWeapon[0] == true)
+            {
+                DelayX = false;
+                AudioManager.instance.SFXPlay("Swing", slashClip);
 
-            Slash[1].SetActive(true);
-            DamgeLine[1].SetActive(true);
+                leftCollider = Physics2D.OverlapBoxAll(transform.Find("SlashL").position, boxSize, 0);
 
-            Invoke("Delay", 0.3f);
-            SwordEulerAngles = true;
+                foreach (Collider2D collider in leftCollider)
+                {
+                    if (collider.CompareTag("Monster"))
+                        collider.GetComponent<Monster>().TakeDamage(GameManager.instance.PlayerDamage);
+                }
+
+                for (int i = 0; i < 30; i++)
+                    SwordOrigin.Rotate(0f, 0f, +2.3f);
+
+                Slash[1].SetActive(true);
+                DamgeLine[1].SetActive(true);
+
+                Invoke("Delay", 0.3f);
+                SwordEulerAngles = true;
+            }
         }
     }
 

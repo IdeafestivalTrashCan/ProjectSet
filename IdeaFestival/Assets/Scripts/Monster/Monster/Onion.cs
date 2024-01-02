@@ -18,7 +18,7 @@ public class Onion : Monster
     }
     private void Start()
     {
-        Init(9, 3, 35, 10, 3, false, 5);
+        Init(9, 3, 50, 10, 3, false, 5);
     }
 
     protected override void AttackPlay()

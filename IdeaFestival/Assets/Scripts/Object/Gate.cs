@@ -16,12 +16,25 @@ public class Gate : MonoBehaviour
     {
         if (IsCheckDistance())
         {
-            if(!isOpen)
-                fMark.SetActive(true);
-            else fMark.SetActive(false);
-            if (Input.GetKeyDown(KeyCode.F) && !isOpen)
+            if (GameManager.instance.isKeyMode)
             {
-                StartCoroutine(Open());
+                if (!isOpen)
+                    fMark.SetActive(true);
+                else fMark.SetActive(false);
+                if (Input.GetKeyDown(KeyCode.F) && !isOpen)
+                {
+                    StartCoroutine(Open());
+                }
+            }
+            else
+            {
+                if (!isOpen)
+                    fMark.SetActive(true);
+                else fMark.SetActive(false);
+                if (Input.GetButtonDown("Interact") && !isOpen)
+                {
+                    StartCoroutine(Open());
+                }
             }
         }
     }

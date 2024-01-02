@@ -11,6 +11,7 @@ public class Portal : MonoBehaviour
     [SerializeField] Vector2 position;
     [SerializeField] int size;
     [SerializeField] bool useRemainMark;
+    [SerializeField] bool isDisalbePlayer;
     private void Awake()
     {
         player = GameObject.Find("GameManager/Player");
@@ -18,8 +19,16 @@ public class Portal : MonoBehaviour
     private void Update()
     {
         if (IsCheckDistance())
-            if (Input.GetKeyDown(KeyCode.F))
-                MoveMap(sceneName, position);
+            if (GameManager.instance.isKeyMode)
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                    MoveMap(sceneName, position);
+            }
+            else
+            {
+                if (Input.GetButtonDown("Interact"))
+                    MoveMap(sceneName, position);
+            }
     }
     protected bool IsCheckDistance()
     {
@@ -38,6 +47,7 @@ public class Portal : MonoBehaviour
         GameManager.instance.moveSceneName = SceneName;
         GameManager.instance.aftPlayerTrans = (Vector3)position;
         GameManager.instance.cameraSize = size;
+        GameManager.instance.isDisablePlayer = isDisalbePlayer;
         GameManager.instance.useRemainMark = useRemainMark;
         yield return null;
     }

@@ -6,6 +6,6 @@ public class GreenOnion : Monster
 {
     void Start()
     {
-        Init(9, 2, 60, 10, 5, false, 5);   
+        Init(9, 2, 80, 10, 5, false, 5);   
     }
 }

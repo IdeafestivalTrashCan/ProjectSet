@@ -20,7 +20,7 @@ public class NPC : MonoBehaviour
     [SerializeField] protected bool isChooseNPC;
 
 
-    protected bool isOnChat = false;
+    public bool isOnChat = false;
 
     [SerializeField] protected int curPage = 0;
     [SerializeField] protected int choosePage = 99;
@@ -36,15 +36,30 @@ public class NPC : MonoBehaviour
         if (IsCheckDistance())
         {
             Debug.Log("인식이 되긴 함;;");
-            if (Input.GetKeyDown(KeyCode.F) && !isOnChat)
+            if (GameManager.instance.isKeyMode)
             {
-                Debug.Log("대화 시작!");
-                Init(chatingDetail.Length, chatingDetail, false);
-                isOnChat = true;
-            }
+                if (Input.GetKeyDown(KeyCode.F) && !isOnChat)
+                {
+                    Debug.Log("대화 시작!");
+                    Init(chatingDetail.Length, chatingDetail, false);
+                    isOnChat = true;
+                }
 
-            if (((Input.GetKeyDown(KeyCode.Space) && isOnChat) || (Input.GetKeyDown(KeyCode.Return) && isOnChat)) )
-                NextPage();
+                if (((Input.GetKeyDown(KeyCode.Space) && isOnChat) || (Input.GetKeyDown(KeyCode.Return) && isOnChat)))
+                    NextPage();
+            }
+            else
+            {
+                if (Input.GetButtonDown("Interact") && !isOnChat)
+                {
+                    Debug.Log("대화 시작!");
+                    Init(chatingDetail.Length, chatingDetail, false);                   
+                    isOnChat = true;
+                }
+
+                if (Input.GetButtonDown("Interact") && isOnChat)
+                    NextPage();
+            }
         }
     }
 
