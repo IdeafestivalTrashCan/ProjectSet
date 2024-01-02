@@ -16,7 +16,7 @@ public class GunCheck : MonoBehaviour
     public void PanelFalse()
     {
         ammoUI.SetActive(true);
-        GameManager.instance.PlayerDamage = 450;
+        GameManager.instance.PlayerDamage = 20;
         Gun.SetActive(true);
         Yangchoo = GameObject.Find("Yangchoo");
         Yangchoo.GetComponent<YangChoo>().NextPage();

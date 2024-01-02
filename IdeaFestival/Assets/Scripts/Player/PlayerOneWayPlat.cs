@@ -9,11 +9,22 @@ public class PlayerOneWayPlat : MonoBehaviour
     [SerializeField] private BoxCollider2D playerCollider;
     private void Update()
     {
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (GameManager.instance.isKeyMode)
         {
-            if(curOnewayPlat != null)
+            if (Input.GetKey(KeyCode.DownArrow))
             {
-                StartCoroutine(DisableCollision());
+                if (curOnewayPlat != null)
+                {
+                    StartCoroutine(DisableCollision());
+                }
+            }
+        }
+        else
+        {
+            if(Input.GetAxisRaw("Vertical") == -1)
+            {
+                if(curOnewayPlat != null)
+                    StartCoroutine(DisableCollision());
             }
         }
 

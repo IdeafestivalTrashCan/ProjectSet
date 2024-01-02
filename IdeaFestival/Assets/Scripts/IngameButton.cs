@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IngameButton : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class IngameButton : MonoBehaviour
     [SerializeField] bool useRemainMark;
 
     [SerializeField] GameObject player;
+    [SerializeField] Slider slider;
 
     private void Awake()
     {
@@ -21,10 +24,16 @@ public class IngameButton : MonoBehaviour
         player.GetComponent<PlayerSetting>().isPause = false;
         Time.timeScale = 1f;
         player.GetComponent<PlayerSetting>().pause.SetActive(false);
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
     public void SettingButton() 
     {
         player.GetComponent<PlayerSetting>().setting.SetActive(true);
+        if (!GameManager.instance.isKeyMode)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            slider.Select();
+        }
     }
     public void GoBackVillageButton()
     {

@@ -56,7 +56,12 @@ public class SceneLoad : MonoBehaviour
         GameManager.instance.player.GetComponent<PlayerController>().canDash = true;
         GameManager.instance.player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         operation.allowSceneActivation = true;
-        GameManager.instance.player.SetActive(true);
-
+        if (!GameManager.instance.isDisablePlayer)
+            GameManager.instance.player.SetActive(true);
+        else
+        {
+            GameManager.instance.player.SetActive(false);
+            Debug.Log("플레이어 꺼져");
+        }
     }
 }

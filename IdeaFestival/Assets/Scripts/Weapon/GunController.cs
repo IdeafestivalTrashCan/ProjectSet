@@ -33,36 +33,65 @@ public class GunController : MonoBehaviour
         if (isSpritePlayer == true)
         {
             GunSpriteRenderer.flipX = true;
-            transform.localPosition = new Vector2(-0.68f, 0.13f);
+            transform.localPosition = new Vector2(-1, 0f);
         }
         else
         {
             GunSpriteRenderer.flipX = false;
-            transform.localPosition = new Vector2(0.68f, 0.13f);
+            transform.localPosition = new Vector2(1, 0f);
         }
-        if ((Input.GetKeyDown(KeyCode.X) && isGun == true
-            && GameManager.instance.PlayerWeapon[1] == true ) && aM.isFireable())
+        if (GameManager.instance.isKeyMode)
         {
-            bullet = Instantiate(prefab);
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            
-            bullet.transform.position = transform.position;
-            bullet.transform.position += new Vector3(0, 0.05f,0);
-            
-            isGun = false;
-            animator.SetTrigger("Fire");
-            aM.Fire();
+            if ((Input.GetKeyDown(KeyCode.X) && isGun == true
+                && GameManager.instance.PlayerWeapon[1] == true) && aM.isFireable())
+            {
+                bullet = Instantiate(prefab);
+                Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
-            if (isSpritePlayer == true)
-                bulletRb.AddForce(Vector2.left * 30, ForceMode2D.Impulse);
-            else
-                bulletRb.AddForce(Vector2.right * 30, ForceMode2D.Impulse);
-            AudioManager.instance.SFXPlay("Swing", FireClip);
-            StartCoroutine(GunDaley());
+                bullet.transform.position = transform.position;
+                bullet.transform.position += new Vector3(0, 0.05f, 0);
+
+                isGun = false;
+                animator.SetTrigger("Fire");
+                aM.Fire();
+
+                if (isSpritePlayer == true)
+                    bulletRb.AddForce(Vector2.left * 30, ForceMode2D.Impulse);
+                else
+                    bulletRb.AddForce(Vector2.right * 30, ForceMode2D.Impulse);
+                AudioManager.instance.SFXPlay("Swing", FireClip);
+                StartCoroutine(GunDaley());
+            }
+
+            if (Input.GetKey(KeyCode.A) && Input.GetKeyDown(KeyCode.R))
+                aM.Reload();
         }
+        else
+        {
+            if ((Input.GetButtonDown("attack") && isGun == true
+                && GameManager.instance.PlayerWeapon[1] == true) && aM.isFireable())
+            {
+                bullet = Instantiate(prefab);
+                Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
-        if (Input.GetKey(KeyCode.A)&& Input.GetKeyDown(KeyCode.R))
-            aM.Reload();
+                bullet.transform.position = transform.position;
+                bullet.transform.position += new Vector3(0, 0.05f, 0);
+
+                isGun = false;
+                animator.SetTrigger("Fire");
+                aM.Fire();
+
+                if (isSpritePlayer == true)
+                    bulletRb.AddForce(Vector2.left * 30, ForceMode2D.Impulse);
+                else
+                    bulletRb.AddForce(Vector2.right * 30, ForceMode2D.Impulse);
+                AudioManager.instance.SFXPlay("Swing", FireClip);
+                StartCoroutine(GunDaley());
+            }
+
+            if (Input.GetButtonDown("Reload"))
+                aM.Reload();
+        }
     }
 
 

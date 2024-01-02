@@ -17,8 +17,11 @@ public class GameManager : MonoBehaviour
 
     public bool[] PlayerWeapon;
 
+    public bool isDisablePlayer;
+
     public int PlayerDamage = 30;
     public Transform playerTrans;
+    public bool isKeyMode;
 
     private void Awake()
     {
@@ -36,7 +39,6 @@ public class GameManager : MonoBehaviour
     {
         Set();
     }
-
     void Set()
     {
         Screen.SetResolution(1920, 1080, true);

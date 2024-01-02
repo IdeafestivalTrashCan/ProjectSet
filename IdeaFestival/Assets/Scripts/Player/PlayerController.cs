@@ -45,35 +45,70 @@ public class PlayerController : MonoBehaviour
 
         if (isDashing)
             return;
-
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (GameManager.instance.isKeyMode)
         {
-            animator.SetBool("isRun", true);
-            transform.Translate(-Speed * Time.deltaTime, 0f, 0f);
-            Renderer.flipX = true;
-        }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                animator.SetBool("isRun", true);
+                transform.Translate(-Speed * Time.deltaTime, 0f, 0f);
+                Renderer.flipX = true;
+            }
 
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            animator.SetBool("isRun", true);
-            transform.Translate(Speed * Time.deltaTime, 0f, 0f);
-            Renderer.flipX = false;
-        }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                animator.SetBool("isRun", true);
+                transform.Translate(Speed * Time.deltaTime, 0f, 0f);
+                Renderer.flipX = false;
+            }
 
+            else
+            {
+                animator.SetBool("isRun", false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.C) && isJump == true)
+            {
+                animator.SetBool("isRun", false);
+                rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z) && canDash)
+            {
+                StartCoroutine(Dash(Renderer.flipX));
+            }
+        }
         else
         {
-            animator.SetBool("isRun", false);
-        }
+            if (Input.GetAxis("Horizontal") == -1)
+            {
+                animator.SetBool("isRun", true);
+                transform.Translate(-Speed * Time.deltaTime, 0f, 0f);
+                Renderer.flipX = true;
+            }
 
-        if (Input.GetKeyDown(KeyCode.C) && isJump == true)
-        {
-            animator.SetBool("isRun", false);
-            rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
-        }
+            else if (Input.GetAxis("Horizontal") == 1)
+            {
+                animator.SetBool("isRun", true);
+                transform.Translate(Speed * Time.deltaTime, 0f, 0f);
+                Renderer.flipX = false;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Z) && canDash)
-        {
-            StartCoroutine(Dash(Renderer.flipX));
+            else
+            {
+                animator.SetBool("isRun", false);
+            }
+
+            if (Input.GetButtonDown("Jump") && isJump == true)
+            {
+                animator.SetBool("isRun", false);
+                rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
+            }
+           
+            if (Input.GetButtonDown("Dash") && canDash)
+            {
+                  
+                StartCoroutine(Dash(Renderer.flipX));
+            }
         }
     }
 
