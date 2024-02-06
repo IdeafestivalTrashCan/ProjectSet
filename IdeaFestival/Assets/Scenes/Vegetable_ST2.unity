@@ -652,6 +652,7 @@ MonoBehaviour:
   size: 0
   useRemainMark: 0
   player: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &130687191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,7 +1629,7 @@ SpriteRenderer:
   m_Size: {x: 6, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &308657926
@@ -8818,8 +8819,9 @@ MonoBehaviour:
   player: {fileID: 0}
   sceneName: Vegetable_Aisle
   position: {x: -16, y: -3.5}
-  size: 6
+  size: 7
   useRemainMark: 1
+  isDisalbePlayer: 0
 --- !u!50 &1254784173
 Rigidbody2D:
   serializedVersion: 4
@@ -9118,6 +9120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4145a2a937a3c45899385e92ce186a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resume: {fileID: 0}
   isPause: 0
   pause: {fileID: 835301984}
   setting: {fileID: 289971549}
@@ -9221,10 +9224,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 732865348}
+  isDead: 0
   maxHp: 200
   curHp: 200
   objects: []
   remainCount: {fileID: 798077009}
+  gameOver: {fileID: 0}
   remainCountText: {fileID: 161086130}
 --- !u!114 &1313294265
 MonoBehaviour:
@@ -9430,6 +9435,7 @@ MonoBehaviour:
   size: 0
   useRemainMark: 0
   player: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &1322803205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9864,8 +9870,10 @@ MonoBehaviour:
   BossCheck: 0
   moveSceneName: 
   PlayerWeapon: 0100
+  isDisablePlayer: 0
   PlayerDamage: 30
   playerTrans: {fileID: 0}
+  isKeyMode: 0
 --- !u!4 &1395159680
 Transform:
   m_ObjectHideFlags: 0
@@ -12663,7 +12671,11 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   size: 0
   useRemainMark: 0
+  isDisablePlayer: 0
   settingPanel: {fileID: 289971549}
+  gameOver: {fileID: 0}
+  selectedSliderSet: {fileID: 0}
+  selectedMain: {fileID: 0}
 --- !u!114 &1908801433
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [Header ("Bool State")]
     private SpriteRenderer Renderer;
-    [SerializeField] private bool isJump = true;
+    public bool isJump = true;
     private Animator animator;
     private Rigidbody2D rigid;
 
