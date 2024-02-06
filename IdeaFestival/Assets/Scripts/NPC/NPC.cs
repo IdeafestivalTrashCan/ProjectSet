@@ -45,7 +45,7 @@ public class NPC : MonoBehaviour
                     isOnChat = true;
                 }
 
-                if (((Input.GetKeyDown(KeyCode.Space) && isOnChat) || (Input.GetKeyDown(KeyCode.Return) && isOnChat)))
+                else if (((Input.GetKeyDown(KeyCode.Space) && isOnChat) || (Input.GetKeyDown(KeyCode.Return) && isOnChat)))
                     NextPage();
             }
             else
@@ -57,7 +57,7 @@ public class NPC : MonoBehaviour
                     isOnChat = true;
                 }
 
-                if (Input.GetButtonDown("Interact") && isOnChat)
+                else if (Input.GetButtonDown("Interact") && isOnChat)
                     NextPage();
             }
         }

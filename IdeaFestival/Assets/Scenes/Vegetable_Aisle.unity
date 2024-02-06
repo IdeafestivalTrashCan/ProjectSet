@@ -1147,7 +1147,7 @@ MonoBehaviour:
   player: {fileID: 0}
   sceneName: Vegetable_Boss
   position: {x: -20, y: -3.3}
-  size: 8
+  size: 7
   useRemainMark: 0
   isDisalbePlayer: 0
 --- !u!50 &231328934
@@ -32286,6 +32286,8 @@ MonoBehaviour:
   isDisablePlayer: 0
   settingPanel: {fileID: 304136459}
   gameOver: {fileID: 0}
+  selectedSliderSet: {fileID: 0}
+  selectedMain: {fileID: 0}
 --- !u!114 &524292610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33920,6 +33922,7 @@ MonoBehaviour:
   size: 0
   useRemainMark: 0
   player: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &707635945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35003,7 +35006,7 @@ SpriteRenderer:
   m_Size: {x: 6, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &789041963
@@ -36113,6 +36116,8 @@ MonoBehaviour:
   isDisablePlayer: 1
   settingPanel: {fileID: 0}
   gameOver: {fileID: 1348121483}
+  selectedSliderSet: {fileID: 0}
+  selectedMain: {fileID: 0}
 --- !u!1 &942867178
 GameObject:
   m_ObjectHideFlags: 0
@@ -39042,6 +39047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4145a2a937a3c45899385e92ce186a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resume: {fileID: 0}
   isPause: 0
   pause: {fileID: 1583265591}
   setting: {fileID: 304136459}
@@ -40187,6 +40193,7 @@ MonoBehaviour:
   isDisablePlayer: 0
   PlayerDamage: 30
   playerTrans: {fileID: 0}
+  isKeyMode: 0
 --- !u!4 &1505285793
 Transform:
   m_ObjectHideFlags: 0
@@ -40419,6 +40426,7 @@ MonoBehaviour:
   size: 0
   useRemainMark: 0
   player: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &1540645189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40524,6 +40532,7 @@ GameObject:
   - component: {fileID: 1541443520}
   - component: {fileID: 1541443522}
   - component: {fileID: 1541443521}
+  - component: {fileID: 1541443523}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -40647,6 +40656,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541443519}
   m_CullTransparentMesh: 1
+--- !u!114 &1541443523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541443519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182d50892004b5f4a94c08f3fae3328b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textString:
+  - F
+  - B
 --- !u!1 &1545630622
 GameObject:
   m_ObjectHideFlags: 0
@@ -42797,6 +42821,8 @@ MonoBehaviour:
   isDisablePlayer: 0
   settingPanel: {fileID: 0}
   gameOver: {fileID: 0}
+  selectedSliderSet: {fileID: 0}
+  selectedMain: {fileID: 0}
 --- !u!114 &1823339538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43555,6 +43581,8 @@ MonoBehaviour:
   isDisablePlayer: 0
   settingPanel: {fileID: 0}
   gameOver: {fileID: 0}
+  selectedSliderSet: {fileID: 0}
+  selectedMain: {fileID: 0}
 --- !u!1 &1941887177
 GameObject:
   m_ObjectHideFlags: 0

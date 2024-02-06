@@ -54,8 +54,11 @@ public class AmmoManager : MonoBehaviour
 
     public void Reload()
     {
-        curAmmo = maxAmmo;
-        AudioManager.instance.SFXPlay("Swing", reloadClip);
+        if (curAmmo != maxAmmo)
+        {
+            curAmmo = maxAmmo;
+            AudioManager.instance.SFXPlay("Swing", reloadClip);
+        }
     }
 
     public void Fire()

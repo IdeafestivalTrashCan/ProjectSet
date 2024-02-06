@@ -15,7 +15,7 @@ public class Papny : Monster
 
     private void Start()
     {
-        Init(20, 5f, 2000, 10, 2, false, 6);
+        Init(20, 5f, 2000, 10, 4, false, 6);
         maxHp = curHp;
         Invoke("Alive", 4.1f);
     }
@@ -169,7 +169,7 @@ public class Papny : Monster
         foreach (Collider2D collider in collider2Ds)
         {
             if (collider.tag == "Player")
-                collider.GetComponent<PlayerUI>().TakeDamage(15);
+                collider.GetComponent<PlayerUI>().TakeDamage(25);
         }
     }
     IEnumerator Die()

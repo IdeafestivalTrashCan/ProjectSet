@@ -12,11 +12,12 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject remainCount;
     [SerializeField] GameObject gameOver;
     [SerializeField] TextMeshProUGUI remainCountText;
+    [SerializeField] Button exit;
     
 
     void Start()
     {
-        gameOver = GameObject.Find("GameManager/Player/PlayerUI/GameOver");
+        gameOver = GameObject.Find("GameManager/Player/PlayerUI/Gameover");
         curHp = maxHp;
         hpBar.value = (float)curHp / maxHp;
     }
@@ -52,6 +53,7 @@ public class PlayerUI : MonoBehaviour
             isDead = true;
             Debug.Log("ав╬Н");
             Time.timeScale = 0;
+            exit.Select();
             gameOver.SetActive(true);
         }
     }

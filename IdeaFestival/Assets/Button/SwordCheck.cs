@@ -14,7 +14,7 @@ public class SwordCheck : MonoBehaviour
     public void Check()
     {
         origin.SetActive(true);
-        GameManager.instance.PlayerDamage = 38;
+        GameManager.instance.PlayerDamage = 35;
         Yangchoo = GameObject.Find("Yangchoo");
         Yangchoo.GetComponent<YangChoo>().NextPage();
         Yangchoo.GetComponent<YangChoo>().button.SetActive(false);
